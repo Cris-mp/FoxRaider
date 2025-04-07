@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bkqhxml7rqx06"]
+[gd_scene load_steps=42 format=3 uid="uid://bkqhxml7rqx06"]
 
 [ext_resource type="Script" uid="uid://duw7hh6g4xqyi" path="res://assets/sprites/player/Player.cs" id="1_5y3cv"]
 [ext_resource type="Texture2D" uid="uid://dcnmt6iim4jk6" path="res://assets/sprites/player/zorrito.png" id="2_o5c73"]
@@ -303,27 +303,37 @@ animations = [{
 radius = 7.0
 height = 22.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mi1md"]
+radius = 7.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5c73"]
 size = Vector2(13, 3)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "rollTimer", "audioNode")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "rollTimer", "audioNode", "Collision", "CollisionRoll")]
 platform_floor_layers = 4294967042
 platform_wall_layers = 4
 script = ExtResource("1_5y3cv")
 anim = NodePath("Sprite")
 rollTimer = NodePath("rollTimer")
 audioNode = NodePath("Audio")
+Collision = NodePath("Collision")
+CollisionRoll = NodePath("CollisionRoll")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_m188g")
-animation = &"Idle"
+animation = &"Climb"
 autoplay = "Idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
 shape = SubResource("CapsuleShape2D_5y3cv")
+
+[node name="CollisionRoll" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_mi1md")
+disabled = true
 
 [node name="HitPoint" type="Area2D" parent="."]
 position = Vector2(0, 2)
@@ -336,10 +346,10 @@ shape = SubResource("RectangleShape2D_o5c73")
 
 [node name="Audio" type="Node" parent="."]
 
-[node name="Jump" type="AudioStreamPlayer2D" parent="Audio"]
+[node name="Jump" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("3_mi1md")
 
-[node name="Hit" type="AudioStreamPlayer2D" parent="Audio"]
+[node name="Hit" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("4_x81q6")
 
 [node name="rollTimer" type="Timer" parent="."]

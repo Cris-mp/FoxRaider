@@ -42,8 +42,16 @@ Se configuro una camara para que siga el movimiento del personaje de forma optim
 ### Configuracion de Tileset
 Se realizó una configuracion basica del tileset del bosque1 para poder hacer las pruebas iniciales del personaje. Se colocaron colisiones y tambien se realizaron autotiles de un par de estructuras. Para ello se siguio el tutorial: [¡TILEMAP, Sistema de TILES 2D!](https://www.youtube.com/watch?v=XVSbjqjJhUQ&list=PL5PTqiCIVoiVyA2qed1NE4uKejXEWM60e&index=14)
 
+## 07/04/2025:🌼Diseño de nivel 1 y corrección de errores
+
+### Corrección de errores
+Se resolvieron los problemas que habia con el salto al estar agarrado a la pared y que se deslice lentamente cuando esta agarrado a la pared. Tambien se implemento correctamente el rodar, ahora al rodar pasa por lugares mas estrechos que andando.
+
+### Diseño del primer nivel: Pradera de los susurros
+Se realizo el diseño de primer nivel y se implemento parallax en el fondo.
+
 ### ➡️ Siguientes pasos
-🚧 Acabar la migracion de los Tilemaps.  
+🚧 Acabar la migracion de los Tilemaps (Falta el tilemap de pantano).  
 ➡️ Migrar el enemigo zarigueya.
 
 # 📊 Planificacion Temporal
@@ -51,7 +59,7 @@ Se realizó una configuracion basica del tileset del bosque1 para poder hacer la
 ✅ Migrar Movimiento de Foxy  
 ⬜ Migrar TileMaps y Física  
 ⬜ IA básica (Zarigüeya)  
-⬜ Diseñar los 6 niveles  
+⬜ Diseñar los 6 niveles: 1️⃣  
 ⬜ Programación de enemigos nuevos  
 ⬜ Desarrollo trampas e interruptores  
 ⬜ Gestión de salas secretas  

@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://cicekm8xkcwn8"]
+[gd_scene load_steps=3 format=3 uid="uid://cicekm8xkcwn8"]
+
+[ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://assets/tilesets/bosque1.tres" id="1_0ef7b"]
+
+[sub_resource type="TileSet" id="TileSet_tp1s8"]
 
 [node name="Bosque1Fase2" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_0ef7b")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayer"]
+tile_set = SubResource("TileSet_tp1s8")

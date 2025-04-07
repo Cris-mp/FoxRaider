@@ -11,29 +11,31 @@ public partial class Player : CharacterBody2D
     [Export] public float WallClimbSpeed = 50f;
     [Export] public int MaxHealth = 6;
 
+
     // Referencias asignadas en el editor
     [Export] public AnimatedSprite2D anim;
     [Export] public Timer rollTimer;
     [Export] public Node audioNode;
+    [Export] public CollisionShape2D Collision;
+    [Export] public CollisionShape2D CollisionRoll;
 
     // Audios
-    private AudioStreamPlayer2D jumpSound;
-    private AudioStreamPlayer2D hitSound;
+    private AudioStreamPlayer jumpSound;
+    private AudioStreamPlayer hitSound;
 
     // Estado del personaje
     private int currentHealth;
     private bool canDoubleJump = false;
     private bool doubleJump = false;
-    private bool canWallGrab = true;
+    private bool canWallGrab = false;
     private bool isRolling = false;
     private bool isDead = false;
-    private bool isWallJumping = false;
 
     public override void _Ready()
     {
         currentHealth = MaxHealth;
-        jumpSound = audioNode.GetNode<AudioStreamPlayer2D>("Jump");
-        hitSound = audioNode.GetNode<AudioStreamPlayer2D>("Hit");
+        jumpSound = audioNode.GetNode<AudioStreamPlayer>("Jump");
+        hitSound = audioNode.GetNode<AudioStreamPlayer>("Hit");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -56,23 +58,31 @@ public partial class Player : CharacterBody2D
         // Salto y doble salto
         if (Input.IsActionJustPressed("jump"))
         {
-            if (isOnFloor) //Salto normal desde el suelo
+            if (isOnFloor) // Salto normal desde el suelo
             {
                 velocity.Y = -JumpForce;
                 doubleJump = true;
                 jumpSound?.Play();
             }
-            else if (!isOnFloor && canDoubleJump && doubleJump) //Permite el doble salto SOLO si la habilidad está desbloqueada y ha echo solo un salto
+            else if (canDoubleJump && doubleJump) // Doble salto si la habilidad está desbloqueada
             {
                 velocity.Y = -JumpForce;
-                doubleJump = false; //Evita más de un doble salto
+                doubleJump = false;
                 jumpSound?.Play();
             }
             else if (isOnWall && canWallGrab) // Salto en la pared
             {
-                velocity.Y = -JumpForce;  // Salto hacia arriba
-                velocity.X = direction != 0 ? direction * Speed : -Speed; // Salto hacia la pared
-                isWallJumping = true;
+                velocity.Y = -JumpForce; // Salto hacia arriba
+
+                //FIXME: Se ha solucionado el salto desde la pared
+                // Determinar la dirección del salto
+                if (anim.FlipH) // Si está mirando a la izquierda, salta hacia la derecha
+                    velocity.X = Speed;
+                else // Si está mirando a la derecha, salta hacia la izquierda
+                    velocity.X = -Speed;
+                canWallGrab = false; // Desactivar agarre momentáneamente para evitar que se pegue a la pared tras saltar
+                GetTree().CreateTimer(0.2f).Timeout += () => canWallGrab = true; // Reactivar después de 0.2 segundos
+
                 jumpSound?.Play();
             }
         }
@@ -81,10 +91,11 @@ public partial class Player : CharacterBody2D
         // Agarrarse a la pared (si la habilidad está desbloqueada)
         if (isOnWall && canWallGrab)
         {
+            //FIXME: Se ha solucionado el descenso disminuyenda el factor de la gravedad
             // Si no se está presionando "arriba" ni "abajo", Foxy se desliza hacia abajo con gravedad controlada
             if (!Input.IsActionPressed("move_up") && !Input.IsActionPressed("move_down"))
             {
-                velocity.Y = Gravity * 0.3f; // Deslizarse lentamente hacia abajo
+                velocity.Y = Gravity * 0.1f; // Deslizarse lentamente hacia abajo
             }
 
             // Si el jugador presiona "arriba", sube lentamente
@@ -92,10 +103,7 @@ public partial class Player : CharacterBody2D
             {
                 velocity.Y = -WallClimbSpeed; // Sube lentamente
             }
-            if (!isOnWall)
-            {
-                isWallJumping = false; //creo que no me entra aqui
-            }
+
         }
 
         // Rodar (Dash rápido en el suelo)
@@ -103,6 +111,8 @@ public partial class Player : CharacterBody2D
         {
             isRolling = true;
             velocity.X = RollSpeed * (direction != 0 ? direction : 1);
+            Collision.Disabled = true;  // Desactiva la colisión grande
+            CollisionRoll.Disabled = false;   // Activa la colisión pequeña
             rollTimer.Start();
         }
 
@@ -115,6 +125,8 @@ public partial class Player : CharacterBody2D
         Velocity = new Vector2(Mathf.Round(velocity.X), Mathf.Round(velocity.Y));
         MoveAndSlide();
     }
+
+
 
     public override void _Process(double delta)
     {
@@ -185,6 +197,10 @@ public partial class Player : CharacterBody2D
     private void _OnRollTimerTimeout()
     {
         isRolling = false;
+        
+        // 🔹 Restaurar colisión (grande activa, pequeña desactiva)
+        Collision.Disabled = false;
+        CollisionRoll.Disabled = true;
     }
 
     // Desbloquear habilidades
