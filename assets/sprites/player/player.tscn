@@ -309,7 +309,7 @@ radius = 7.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5c73"]
 size = Vector2(13, 3)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "rollTimer", "audioNode", "Collision", "CollisionRoll")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "rollTimer", "audioNode", "Collision", "CollisionRoll", "HitPoint")]
 platform_floor_layers = 4294967042
 platform_wall_layers = 4
 script = ExtResource("1_5y3cv")
@@ -318,13 +318,16 @@ rollTimer = NodePath("rollTimer")
 audioNode = NodePath("Audio")
 Collision = NodePath("Collision")
 CollisionRoll = NodePath("CollisionRoll")
+HitPoint = NodePath("HitPoint")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_m188g")
-animation = &"Climb"
+animation = &"Idle"
 autoplay = "Idle"
+frame = 1
+frame_progress = 0.729571
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
@@ -338,7 +341,6 @@ disabled = true
 [node name="HitPoint" type="Area2D" parent="."]
 position = Vector2(0, 2)
 collision_mask = 8
-monitorable = false
 
 [node name="Collision" type="CollisionShape2D" parent="HitPoint"]
 position = Vector2(-0.5, -0.5)

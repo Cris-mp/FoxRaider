@@ -11,6 +11,8 @@ public partial class Player : CharacterBody2D
     [Export] public float WallClimbSpeed = 50f;
     [Export] public int MaxHealth = 6;
 
+ 
+
 
     // Referencias asignadas en el editor
     [Export] public AnimatedSprite2D anim;
@@ -18,6 +20,7 @@ public partial class Player : CharacterBody2D
     [Export] public Node audioNode;
     [Export] public CollisionShape2D Collision;
     [Export] public CollisionShape2D CollisionRoll;
+    [Export] public Area2D HitPoint;
 
     // Audios
     private AudioStreamPlayer jumpSound;
@@ -31,11 +34,17 @@ public partial class Player : CharacterBody2D
     private bool isRolling = false;
     private bool isDead = false;
 
+    // Límites de movimiento
+    public float LeftLimit; 
+    public float RightLimit;
+
     public override void _Ready()
     {
         currentHealth = MaxHealth;
         jumpSound = audioNode.GetNode<AudioStreamPlayer>("Jump");
         hitSound = audioNode.GetNode<AudioStreamPlayer>("Hit");
+
+        HitPoint.AreaEntered += OnHitEnemy;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -122,11 +131,22 @@ public partial class Player : CharacterBody2D
             TakeDamage(6); // Pierde toda la vida
         }
 
+        Vector2 position = GlobalPosition;
+
+        // Limitar a Foxy dentro de los bordes del nivel
+        position.X = Mathf.Clamp(position.X, LeftLimit, RightLimit);
+
+        GlobalPosition = position;
+
         Velocity = new Vector2(Mathf.Round(velocity.X), Mathf.Round(velocity.Y));
         MoveAndSlide();
     }
 
-
+    public void SetLimits(float left, float right)
+    {
+        LeftLimit = left;
+        RightLimit = right;
+    }
 
     public override void _Process(double delta)
     {
@@ -197,10 +217,21 @@ public partial class Player : CharacterBody2D
     private void _OnRollTimerTimeout()
     {
         isRolling = false;
-        
+
         // 🔹 Restaurar colisión (grande activa, pequeña desactiva)
         Collision.Disabled = false;
         CollisionRoll.Disabled = true;
+    }
+
+    private void OnHitEnemy(Area2D area)
+    {
+        if (area.Owner is Enemies enemy && !enemy.IsDead())
+        {
+            enemy.TakeDamage(1);
+
+            // Rebote del jugador al pisar
+            Velocity = new Vector2(Velocity.X, -JumpForce / 1.5f); // Rebote más suave
+        }
     }
 
     // Desbloquear habilidades

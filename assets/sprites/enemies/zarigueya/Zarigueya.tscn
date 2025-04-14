@@ -1,0 +1,176 @@
+[gd_scene load_steps=15 format=3 uid="uid://ceh8s3ydsvpt3"]
+
+[ext_resource type="Script" uid="uid://cov3333b8w4pa" path="res://assets/sprites/enemies/zarigueya/Zarigueya.cs" id="1_teyrs"]
+[ext_resource type="Texture2D" uid="uid://d27fwekxlylqr" path="res://assets/sprites/enemies/zarigueya/opossum.png" id="2_k5ssv"]
+[ext_resource type="Texture2D" uid="uid://dgbeg31vgruat" path="res://assets/sprites/enemies/zarigueya/enemy-deadth.png" id="3_hck0s"]
+
+[sub_resource type="Animation" id="Animation_vpgim"]
+resource_name = "Dead"
+length = 0.5
+step = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_hck0s")]
+}
+
+[sub_resource type="Animation" id="Animation_qtpa6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_k5ssv")]
+}
+
+[sub_resource type="Animation" id="Animation_7uy0l"]
+resource_name = "Run"
+length = 0.56
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.11, 0.22, 0.33, 0.44, 0.55),
+"transitions": PackedFloat32Array(1.1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_k5ssv")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmrhl"]
+_data = {
+&"Dead": SubResource("Animation_vpgim"),
+&"RESET": SubResource("Animation_qtpa6"),
+&"Run": SubResource("Animation_7uy0l")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_teyrs"]
+animation = &"Dead"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k5ssv"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hck0s"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7uy0l"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qtpa6"]
+states/Dead/node = SubResource("AnimationNodeAnimation_teyrs")
+states/Dead/position = Vector2(500, 119)
+states/End/position = Vector2(668, 119)
+states/Run/node = SubResource("AnimationNodeAnimation_k5ssv")
+states/Run/position = Vector2(347, 119)
+states/Start/position = Vector2(201, 119)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_hck0s"), "Run", "Dead", SubResource("AnimationNodeStateMachineTransition_7uy0l")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5ssv"]
+size = Vector2(7.5, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_teyrs"]
+size = Vector2(20.5, 15)
+
+[node name="Zarigueya" type="CharacterBody2D" node_paths=PackedStringArray("animationTree", "WallCheck", "GroundCheck", "FrontHitbox")]
+collision_layer = 8
+collision_mask = 15
+platform_floor_layers = 4294967042
+platform_wall_layers = 4
+script = ExtResource("1_teyrs")
+animationTree = NodePath("Sprite2D/AnimationTree")
+WallCheck = NodePath("Sprite2D/WallCheck")
+GroundCheck = NodePath("Sprite2D/GroundCheck")
+FrontHitbox = NodePath("Sprite2D/FrontHitbox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k5ssv")
+hframes = 6
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_kmrhl")
+}
+autoplay = "Run"
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+tree_root = SubResource("AnimationNodeStateMachine_qtpa6")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="FrontHitbox" type="Area2D" parent="Sprite2D"]
+collision_layer = 8
+
+[node name="FrontHitbox" type="CollisionShape2D" parent="Sprite2D/FrontHitbox"]
+position = Vector2(-14, 4)
+scale = Vector2(1.00264, 1)
+shape = SubResource("RectangleShape2D_k5ssv")
+
+[node name="WallCheck" type="RayCast2D" parent="Sprite2D"]
+position = Vector2(-18, 4)
+target_position = Vector2(-5, 0)
+collision_mask = 4
+
+[node name="GroundCheck" type="RayCast2D" parent="Sprite2D"]
+position = Vector2(-10, 14)
+target_position = Vector2(0, 5)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 0
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_teyrs")
+
+[connection signal="animation_finished" from="Sprite2D/AnimationTree" to="." method="OnAnimationFinished"]
+[connection signal="body_entered" from="Sprite2D/FrontHitbox" to="." method="OnFrontHit"]

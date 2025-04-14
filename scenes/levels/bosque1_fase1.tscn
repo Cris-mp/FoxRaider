@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=4 uid="uid://c0tdcdv408r8k"]
+[gd_scene load_steps=9 format=4 uid="uid://c0tdcdv408r8k"]
 
 [ext_resource type="PackedScene" uid="uid://5pyjvjts2vwy" path="res://scenes/Camera.tscn" id="1_dlr3r"]
 [ext_resource type="Texture2D" uid="uid://dqhnad8b14d1e" path="res://assets/backgrounds/b1_f1/back.png" id="1_s6gyn"]
+[ext_resource type="Script" uid="uid://crptywb3x3e3" path="res://scenes/levels/Bosque1Fase1.cs" id="1_smwv2"]
 [ext_resource type="Texture2D" uid="uid://druy86j46gwjd" path="res://assets/backgrounds/b1_f1/middle.png" id="2_k8hws"]
 [ext_resource type="PackedScene" uid="uid://bkqhxml7rqx06" path="res://assets/sprites/player/player.tscn" id="2_qppb5"]
 [ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://assets/tilesets/bosque1.tres" id="3_qppb5"]
+[ext_resource type="PackedScene" uid="uid://ceh8s3ydsvpt3" path="res://assets/sprites/enemies/zarigueya/Zarigueya.tscn" id="6_k8hws"]
+[ext_resource type="PackedScene" uid="uid://db83odfpemnlc" path="res://assets/sprites/collectables/cherry.tscn" id="8_n6ct5"]
 
 [node name="Bosque1Fase1" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_smwv2")
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
@@ -53,10 +57,38 @@ tile_set = ExtResource("3_qppb5")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_dlr3r")]
 position = Vector2(-1, 0)
+limit_left = 0
+limit_right = 2564
+limit_smoothed = true
 position_smoothing_speed = 10.0
 drag_horizontal_offset = 0.2
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_qppb5")]
-position = Vector2(16, 160)
+position = Vector2(32, 160)
 collision_mask = 6
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Zarigueya" parent="Enemies" instance=ExtResource("6_k8hws")]
+position = Vector2(1488, 144)
+
+[node name="Zarigueya2" parent="Enemies" instance=ExtResource("6_k8hws")]
+position = Vector2(976, -16)
+
+[node name="Zarigueya3" parent="Enemies" instance=ExtResource("6_k8hws")]
+position = Vector2(720, 144)
+
+[node name="Zarigueya4" parent="Enemies" instance=ExtResource("6_k8hws")]
+position = Vector2(1520, 32)
+
+[node name="Zarigueya5" parent="Enemies" instance=ExtResource("6_k8hws")]
+position = Vector2(2192, 64)
+
+[node name="Zarigueya6" parent="Enemies" instance=ExtResource("6_k8hws")]
+position = Vector2(2000, -32)
+
+[node name="Collectables" type="Node2D" parent="."]
+
+[node name="Cherry" parent="Collectables" instance=ExtResource("8_n6ct5")]
+position = Vector2(128, 128)
