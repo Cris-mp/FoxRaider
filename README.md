@@ -56,18 +56,34 @@ Se ha creado una clase enemigos con funciones comunes para todos los enemigos y 
 🐛 A veces Foxy recibe daño cuando le salta encima, asi que queda pendiente de solución.
 ### Limites
 Se han implementado limites al jugador (mediante el scrip de nivel de forma que pueda tener distintos limites segun el nivel) y a la camara (mediante el inspector). De esta forma la camara no se sale de los limites del escenario cuando llega a los bordes y foxy tampoco puede salir.
-### Coleccionbles
+### Coleccionables
 Se ha implemetado el coleccionable cereza. Aun no le he puesto una funcionalidad en si Foxy lo coge el coleccionable desaparece.    
 🐛No se por que no me conecta la señal de animation_Finished con mi funcion OnAnimationFinishedCollectable(StringName animName).
 
+## 📅 21/04/2025: 🏯 Diseño de nivel 2  y 🔓 zonas ocultas
+
+### Coleccionbles
+OnAnimationFinishedCollectable(StringName animName) ➡️ OnAnimationFinishedCollectable():
+- El nodo AnimatedSprite2D emite la señal animation_finished() sin argumentos. Mi método OnAnimationFinishedCollectable(StringName animName) espera un argumento, lo cual provoca que no lo encuentre correctamente y falle la conexión.
+ 
+### Transición a nivel 2 y desbloqueo de salto
+Se ha realizado la transición entre niveles mediante un trigger situado al final de cada fase. Para gestionar el progreso del jugador (habilidades desbloqueadas, nivel actual, etc) entre escenas he usado un Singleton (Autoload).
+
+### Diseño del nivel 2: Ruinas del Ancestro
+### Plataformas móviles y algunas rompibles. 
+Se han realizado dos tipos de plataformas, unas moviles que se mueven en el eje de las X y de las Y. Y otras que desaparecen, queria hacer que cayesen pero despues de varios intentos lo he dejado con que solo desaparezcan. Lo dejo pendiente para hacer mas adelante segun el tiempo que tenga.
+### Introducción a trampas (pinchos y fosos).
+Se ha realizado la escena de pinchos pero aun no hace daño al jugador. No he puesto fosos aun.
+### Primeras secciones de precisión en saltos.
+Estoy realizado las zonas de plataformas ajustando algunos saltos. Hay zonas que aun no estas bien ajustadas.
+### Zona Oculta: Fragmento 1 de la lagrima. 
+Se ha realizado la zona oculta mediante un trigger que ocupa toda la sala que desactiva la tilemaplayer superior dejando a la vista la sala secreta cuando Foxy entra.
+
 ### ➡️ Siguientes pasos
 
-Lo siguiente sera hacer la transición hacia el nivel 2 y el desbloqueo del doble salto. Además se realizará el nivel 2:
-#### RUINAS DEL ANCESTRO (PLATAFORMAS CON PRECISIÓN Y PRIMERAS TRAMPAS)
-- Plataformas móviles y algunas rompibles.
-- Introducción a trampas (pinchos y fosos).
-- Primeras secciones de precisión en saltos.
-- ⛔ Zona Oculta: Fragmento 1 de la lagrima. ➡️ La zona oculta la dejare para mas adelante
+- Acabar la fase 2 implementando foso de alguna manera. 
+- Añadir enemigos y collecionables. Estoy planteandome en añadir algun enemigo simple en esta fase ademas de las zarigueyas. 
+- Hacer la primera lagrima.
 
 🚧 Acabar la migracion de los Tilemaps (Falta el tilemap de pantano).  
 

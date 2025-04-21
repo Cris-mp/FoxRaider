@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://db83odfpemnlc"]
+[gd_scene load_steps=17 format=3 uid="uid://db83odfpemnlc"]
 
 [ext_resource type="Script" uid="uid://b21nphwju47ha" path="res://assets/sprites/collectables/Cherry.cs" id="1_oxudi"]
 [ext_resource type="Texture2D" uid="uid://b3buj8lqqj16f" path="res://assets/sprites/collectables/item-feedback.png" id="2_7tlkh"]
 [ext_resource type="Texture2D" uid="uid://cqgsp57vk6d16" path="res://assets/sprites/collectables/cherry.png" id="2_e572b"]
+[ext_resource type="AudioStream" uid="uid://b5x4h7c6k7lop" path="res://assets/audio/sounds/coin.ogg" id="4_7tlkh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qenyg"]
 atlas = ExtResource("2_7tlkh")
@@ -64,7 +65,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Collect",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -84,7 +85,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 6.0
+"speed": 8.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oxudi"]
@@ -98,9 +99,14 @@ AnimatedSprite = NodePath("AnimatedSprite2D")
 sprite_frames = SubResource("SpriteFrames_qenyg")
 animation = &"Collect"
 autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_oxudi")
+
+[node name="Feed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7tlkh")
 
 [connection signal="body_entered" from="." to="." method="recolectarCherry"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimationFinishedCollectable"]

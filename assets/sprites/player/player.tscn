@@ -350,6 +350,7 @@ shape = SubResource("RectangleShape2D_o5c73")
 
 [node name="Jump" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("3_mi1md")
+volume_db = -30.796
 
 [node name="Hit" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("4_x81q6")

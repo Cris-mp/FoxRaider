@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://r1focgk5lfs7"]
+
+[ext_resource type="Script" uid="uid://dpgbx8jw5lwgg" path="res://scenes/tools/ZonaControl.cs" id="1_nj1nj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek44i"]
+
+[node name="ZonaControl" type="Area2D"]
+script = ExtResource("1_nj1nj")
+
+[node name="CollisionZona" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ek44i")

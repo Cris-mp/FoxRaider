@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4ctki4ty6qxm"]
+
+[ext_resource type="Script" uid="uid://v0rtbt31q40o" path="res://assets/sprites/platforms/fallingPlatform/FallingPlatform.cs" id="1_2uv28"]
+[ext_resource type="Texture2D" uid="uid://b1pvl0owrrsqd" path="res://assets/sprites/platforms/platform-long.png" id="2_wjg37"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_webfy"]
+size = Vector2(32, 16.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72te4"]
+size = Vector2(32, 5)
+
+[node name="FallingPlatformNode" type="Node2D"]
+script = ExtResource("1_2uv28")
+
+[node name="FallingPlatform" type="CharacterBody2D" parent="."]
+collision_layer = 2
+
+[node name="SpriteFallPlat" type="Sprite2D" parent="FallingPlatform"]
+texture = ExtResource("2_wjg37")
+
+[node name="ResetTimer" type="Timer" parent="FallingPlatform"]
+
+[node name="CollisionFallPlat" type="CollisionShape2D" parent="FallingPlatform"]
+position = Vector2(0, 0.125)
+shape = SubResource("RectangleShape2D_webfy")
+
+[node name="AreaFallPlat" type="Area2D" parent="FallingPlatform"]
+
+[node name="CollisionSensor" type="CollisionShape2D" parent="FallingPlatform/AreaFallPlat"]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_72te4")
+debug_color = Color(0.45742, 0.531035, 0.71909, 0.42)

@@ -28,9 +28,9 @@ public partial class Player : CharacterBody2D
 
     // Estado del personaje
     private int currentHealth;
-    private bool canDoubleJump = false;
+    private bool canDoubleJump= GameState.HasDoubleJump;
     private bool doubleJump = false;
-    private bool canWallGrab = false;
+    private bool canWallGrab = GameState.HasWallGrab;
     private bool isRolling = false;
     private bool isDead = false;
 
@@ -233,8 +233,4 @@ public partial class Player : CharacterBody2D
             Velocity = new Vector2(Velocity.X, -JumpForce / 1.5f); // Rebote más suave
         }
     }
-
-    // Desbloquear habilidades
-    public void UnlockDoubleJump() => canDoubleJump = true;
-    public void UnlockWallGrab() => canWallGrab = true;
 }
