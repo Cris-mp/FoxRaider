@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cid7jpl4c70xl"]
+
+[ext_resource type="Script" uid="uid://cy3whglcox81a" path="res://assets/sprites/traps/ArrowShooter/ArrowShooter.cs" id="1_f57bc"]
+[ext_resource type="PackedScene" uid="uid://chk6v5ei1b4t2" path="res://assets/sprites/traps/ArrowShooter/Arrow.tscn" id="2_w30wk"]
+[ext_resource type="Texture2D" uid="uid://dl8to7kxybj26" path="res://assets/sprites/traps/ArrowShooter/face-block.png" id="3_023xt"]
+
+[node name="ArrowShooter" type="Node2D"]
+script = ExtResource("1_f57bc")
+ArrowScene = ExtResource("2_w30wk")
+
+[node name="SpriteShooter" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("3_023xt")
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true

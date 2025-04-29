@@ -47,7 +47,7 @@ Se realizó una configuracion basica del tileset del bosque1 para poder hacer la
 ### Corrección de errores
 Se resolvieron los problemas que habia con el salto al estar agarrado a la pared y que se deslice lentamente cuando esta agarrado a la pared. Tambien se implemento correctamente el rodar, ahora al rodar pasa por lugares mas estrechos que andando.
 
-### Diseño del primer nivel: Pradera de los susurros
+### Diseño del nivel 1: Pradera de los susurros
 Se realizo el diseño de primer nivel y se implemento parallax en el fondo.
 
 ## 📅 07/04/2025: 🐀 Migración de la zarigueya
@@ -79,24 +79,44 @@ Estoy realizado las zonas de plataformas ajustando algunos saltos. Hay zonas que
 ### Zona Oculta: Fragmento 1 de la lagrima. 
 Se ha realizado la zona oculta mediante un trigger que ocupa toda la sala que desactiva la tilemaplayer superior dejando a la vista la sala secreta cuando Foxy entra.
 
+## 📅 29/04/2025: 🏯 Finalizado el diseño del nivel 2, ![](assets\sprites\collectables\teer\full-teer.png) Creación de La Lagrima de Gaia y 💎 Diseño de Nivel 3 
+
+### Finalizado el diseño del nivel 2
+Se ha implementado mediante un Trigger que elimina la vida del jugador cuando entra en él y se han añadido enemigos y colleccionables.
+
+### Diseño y escenas de la Lagrima de Gaia
+Se ha realizado el diseño de la gema y se ha creado una escena Fragmento que representa uno de los tres fragmentos coleccionables de la Lágrima de Gaia (![](assets\sprites\collectables\teer\red_gem.png),![](assets\sprites\collectables\teer\green_gem.png),![](assets\sprites\collectables\teer\blue_gem.png)). Ademas se ha incluido dentro de la zona secreta del nivel 2
+
+### Diseño del nivel 3: Cueva Zafiro
+Se realizo el diseño inicial de tercer nivel y se implemento parallax en el fondo.
+
+### Nuevas trampas (flechas que salen de la pared).
+Se ha creado la escena de ArrowShooter que es un bloque que lanza flechas (escena Arrow). Se puede decidir la velocidad de generacion de las flechas asi como la direccion desde el editor de godot. Se han implementado en el nivel 3
+
 ### ➡️ Siguientes pasos
 
-- Acabar la fase 2 implementando foso de alguna manera. 
-- Añadir enemigos y collecionables. Estoy planteandome en añadir algun enemigo simple en esta fase ademas de las zarigueyas. 
-- Hacer la primera lagrima.
+- Murciélagos
+- Realizar el HUD
+
+Creo que al acabar el nivel 3 pasare a hacer el sistema de guardado o los menus iniciales. Asi como hacer puntos de respawn dentro los niveles que tengo.
 
 🚧 Acabar la migracion de los Tilemaps (Falta el tilemap de pantano).  
 
+# 🐛 Bugs detectados (pendientes de solución)
+- A veces Foxy recibe daño cuando le salta encima de una zarigueya.
+- No se establece animacion de saltar cuando Foxy esta en contacto con la pared.
+- Si Foxy termina de rodar en una zona estrecha se queda atascado.
+- Al caer no se me activa el salto
 
 # 📊 Planificacion Temporal
 ✅ Configuración de Godot  
 ✅ Migrar Movimiento de Foxy  
 ⬜ Migrar TileMaps y Física  
 ✅ IA básica (Zarigüeya)  
-⬜ Diseñar los 6 niveles: 1️⃣  
+⬜ Diseñar los 6 niveles: 1️⃣ 2️⃣  
 ⬜ Programación de enemigos nuevos  
 ⬜ Desarrollo trampas e interruptores  
-⬜ Gestión de salas secretas  
+✅ Gestión de salas secretas  
 ⬜ Sistema de habilidades desbloqueables  
 ⬜ Sistema de Guardado (JSON)  
 ⬜ Crear el Selector de Niveles  

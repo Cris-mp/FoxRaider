@@ -23,6 +23,7 @@ texture = ExtResource("2_wjg37")
 [node name="CollisionFallPlat" type="CollisionShape2D" parent="FallingPlatform"]
 position = Vector2(0, 0.125)
 shape = SubResource("RectangleShape2D_webfy")
+debug_color = Color(0.752851, 0.456689, 0.066148, 0.42)
 
 [node name="AreaFallPlat" type="Area2D" parent="FallingPlatform"]
 

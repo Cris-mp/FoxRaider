@@ -13,7 +13,7 @@ public partial class Cherry : Area2D
     {
         base._Ready();
         FeedSound = GetNode<AudioStreamPlayer>("Feed");
-        AnimatedSprite.Play("Idle");    
+        AnimatedSprite.Play("Idle");
     }
 
     private void recolectarCherry(Node body)
@@ -22,12 +22,12 @@ public partial class Cherry : Area2D
 
         if (body is Player player)
         {
-            AnimatedSprite.Play("Collect"); 
+            AnimatedSprite.Play("Collect");
             FeedSound?.Play();
             isCollected = true;
         }
     }
-   
+
     public void OnAnimationFinishedCollectable()
     {
         if (AnimatedSprite.Animation == "Collect")

@@ -11,7 +11,7 @@ public partial class Player : CharacterBody2D
     [Export] public float WallClimbSpeed = 50f;
     [Export] public int MaxHealth = 6;
 
- 
+
 
 
     // Referencias asignadas en el editor
@@ -28,14 +28,14 @@ public partial class Player : CharacterBody2D
 
     // Estado del personaje
     private int currentHealth;
-    private bool canDoubleJump= GameState.HasDoubleJump;
+    private bool canDoubleJump = true;//GameState.HasDoubleJump;
     private bool doubleJump = false;
     private bool canWallGrab = GameState.HasWallGrab;
     private bool isRolling = false;
     private bool isDead = false;
 
     // Límites de movimiento
-    public float LeftLimit; 
+    public float LeftLimit;
     public float RightLimit;
 
     public override void _Ready()
@@ -83,8 +83,6 @@ public partial class Player : CharacterBody2D
             {
                 velocity.Y = -JumpForce; // Salto hacia arriba
 
-                //FIXME: Se ha solucionado el salto desde la pared
-                // Determinar la dirección del salto
                 if (anim.FlipH) // Si está mirando a la izquierda, salta hacia la derecha
                     velocity.X = Speed;
                 else // Si está mirando a la derecha, salta hacia la izquierda
@@ -100,8 +98,6 @@ public partial class Player : CharacterBody2D
         // Agarrarse a la pared (si la habilidad está desbloqueada)
         if (isOnWall && canWallGrab)
         {
-            //FIXME: Se ha solucionado el descenso disminuyenda el factor de la gravedad
-            // Si no se está presionando "arriba" ni "abajo", Foxy se desliza hacia abajo con gravedad controlada
             if (!Input.IsActionPressed("move_up") && !Input.IsActionPressed("move_down"))
             {
                 velocity.Y = Gravity * 0.1f; // Deslizarse lentamente hacia abajo

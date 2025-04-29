@@ -12,8 +12,8 @@ public partial class MovingPlatform : Node2D
 
     public override void _Ready()
     {
-        PointA = GlobalPosition;                 
-        PointB = PointA + RelativeOffset;         
+        PointA = GlobalPosition;
+        PointB = PointA + RelativeOffset;
     }
 
     public override void _Process(double delta)
@@ -23,7 +23,7 @@ public partial class MovingPlatform : Node2D
 
         // Mover la plataforma hacia el punto destino
         GlobalPosition = GlobalPosition.MoveToward(target, Speed * (float)delta);
-        
+
         // Si la plataforma está en movimiento, mover al jugador con ella
         if (playerOnPlatform != null)
         {
@@ -36,5 +36,5 @@ public partial class MovingPlatform : Node2D
             goingToB = !goingToB;
     }
 
-    
+
 }

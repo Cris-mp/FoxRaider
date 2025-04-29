@@ -17,3 +17,4 @@ collision_layer = 2
 
 [node name="CollisionMovPlat" type="CollisionShape2D" parent="MovPlat"]
 shape = SubResource("RectangleShape2D_qoda7")
+debug_color = Color(0.372528, 0.614954, 0, 0.42)

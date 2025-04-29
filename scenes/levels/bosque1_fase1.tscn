@@ -67,7 +67,6 @@ player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_qppb5")]
 position = Vector2(16, 160)
-collision_mask = 6
 
 [node name="Enemies" type="Node2D" parent="."]
 

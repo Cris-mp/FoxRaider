@@ -25,7 +25,7 @@ public partial class FallingPlatform : Node2D
         platformSensor = area.GetNode<CollisionShape2D>("CollisionSensor");
         sprite = platformBody.GetNode<Sprite2D>("SpriteFallPlat");
         respawnTimer = platformBody.GetNode<Timer>("ResetTimer");
-      
+
         // Area para detectar al jugador
         area.BodyEntered += OnBodyEntered;
         respawnTimer.Timeout += OnRespawn;
