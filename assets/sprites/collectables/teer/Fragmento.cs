@@ -21,8 +21,7 @@ public partial class Fragmento : Area2D
         if (body is Player)
         {
             GameState.CollectFragment(Color);
-            //var hud = GetTree().Root.GetNode<LagrimaHUD>("LagrimaHUD");
-            //hud.ActualizarHUD();
+            
             QueueFree();
         }
     }

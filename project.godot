@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FoxRaider"
-run/main_scene="uid://c6r3mj5ntpko3"
+run/main_scene="uid://debwf6lf8y3ji"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"

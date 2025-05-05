@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://cicekm8xkcwn8"]
+[gd_scene load_steps=15 format=4 uid="uid://cicekm8xkcwn8"]
 
 [ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://assets/tilesets/bosque1.tres" id="1_0ef7b"]
 [ext_resource type="Script" uid="uid://bee5bq1cs21pk" path="res://scenes/levels/Bosque1Fase2.cs" id="1_vbvsf"]
+[ext_resource type="PackedScene" uid="uid://cmonnygm473bq" path="res://scenes/tools/HUD.tscn" id="2_pltl6"]
 [ext_resource type="PackedScene" uid="uid://c2hpg3dowilww" path="res://assets/sprites/traps/Spikes/spike.tscn" id="2_tp1s8"]
 [ext_resource type="PackedScene" uid="uid://5pyjvjts2vwy" path="res://scenes/tools/Camera.tscn" id="3_e65ps"]
 [ext_resource type="PackedScene" uid="uid://6vwncf6x55fb" path="res://assets/sprites/collectables/teer/Fragmento.tscn" id="4_fkikm"]
@@ -16,6 +17,8 @@
 
 [node name="Bosque1Fase2" type="Node2D"]
 script = ExtResource("1_vbvsf")
+
+[node name="Hud" parent="." instance=ExtResource("2_pltl6")]
 
 [node name="Ruinas del Ancestro" type="Node2D" parent="."]
 
@@ -113,7 +116,7 @@ drag_top_margin = 0.0
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_vbvsf")]
-position = Vector2(128, -976)
+position = Vector2(720, 144)
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -207,7 +210,8 @@ RelativeOffset = Vector2(-200, 0)
 [node name="TriggerCambioNivel" parent="." instance=ExtResource("8_ckd6s")]
 position = Vector2(1328, 96)
 scale = Vector2(1, 3)
-ScenePath = "uid://c0tdcdv408r8k"
+ScenePath = "uid://c6r3mj5ntpko3"
+NivelDesbloquear = 3
 
 [node name="ZonaControl1" parent="." node_paths=PackedStringArray("tilemapTarget") instance=ExtResource("9_ckd6s")]
 position = Vector2(778, -42)

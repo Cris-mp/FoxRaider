@@ -28,7 +28,7 @@ public partial class Player : CharacterBody2D
 
     // Estado del personaje
     private int currentHealth;
-    private bool canDoubleJump = true;//GameState.HasDoubleJump;
+    private bool canDoubleJump = GameState.HasDoubleJump;
     private bool doubleJump = false;
     private bool canWallGrab = GameState.HasWallGrab;
     private bool isRolling = false;
@@ -38,12 +38,13 @@ public partial class Player : CharacterBody2D
     public float LeftLimit;
     public float RightLimit;
 
+    [Signal]public delegate void HealthChangedEventHandler(int newHealth);
+
     public override void _Ready()
     {
         currentHealth = MaxHealth;
         jumpSound = audioNode.GetNode<AudioStreamPlayer>("Jump");
-        hitSound = audioNode.GetNode<AudioStreamPlayer>("Hit");
-
+        hitSound = audioNode.GetNode<AudioStreamPlayer>("Hit");       
         HitPoint.AreaEntered += OnHitEnemy;
     }
 
@@ -177,6 +178,7 @@ public partial class Player : CharacterBody2D
 
         currentHealth -= damage;
         hitSound?.Play(); // Reproducir sonido de daño
+        EmitSignal(SignalName.HealthChanged, currentHealth);
         GD.Print($"Foxy recibió daño, vida actual: {currentHealth}");
 
         if (currentHealth <= 0)

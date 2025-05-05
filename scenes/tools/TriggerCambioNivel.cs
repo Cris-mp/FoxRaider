@@ -7,6 +7,7 @@ public partial class TriggerCambioNivel : Area2D
 
     [Export] public bool desbloquearDobleSalto = false;
     [Export] public bool desbloquearPared = false;
+    [Export] public int NivelDesbloquear = 1;
 
     public override void _Ready()
     {
@@ -35,16 +36,24 @@ public partial class TriggerCambioNivel : Area2D
     }
 
     private void CambiarEscena()
+{
+    if (NivelDesbloquear > GameState.MaxLevelUnlocked)
     {
-        var scene = ResourceLoader.Load<PackedScene>(ScenePath);
-        if (scene != null)
-        {
-            GetTree().ChangeSceneToPacked(scene);
-        }
-        else
-        {
-            GD.PrintErr($"❌ Error al cargar la escena desde: {ScenePath}");
-        }
+        GameState.MaxLevelUnlocked = NivelDesbloquear;
+        GD.Print($"✅ Nivel desbloqueado: nivel {NivelDesbloquear}");
     }
+
+    GameState.SaveGame();
+
+    var scene = ResourceLoader.Load<PackedScene>(ScenePath);
+    if (scene != null)
+    {
+        GetTree().ChangeSceneToPacked(scene);
+    }
+    else
+    {
+        GD.PrintErr($"❌ Error al cargar la escena desde: {ScenePath}");
+    }
+}
 }
 

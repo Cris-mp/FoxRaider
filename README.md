@@ -93,14 +93,19 @@ Se realizo el diseño inicial de tercer nivel y se implemento parallax en el fon
 ### Nuevas trampas (flechas que salen de la pared).
 Se ha creado la escena de ArrowShooter que es un bloque que lanza flechas (escena Arrow). Se puede decidir la velocidad de generacion de las flechas asi como la direccion desde el editor de godot. Se han implementado en el nivel 3
 
+## 📅 05/05/2025: 📋 Menu principal, 💾 guardado de datos e ♥️ inicio del HUD
+### Menu de inicio y selector de niveles
+Se ha simplificado el menu de inicio y  realizado un selector de niveles básico que conecta con los diferentes niveles.
+### Guardado de datos
+Se ha revisado y corregido el autoload (Gamestate.cs) para que guarde correctamente los datos del juego en un archivo json.
+### HUD
+Se ha iniciado el hud y estoy intentando unir las diferentes partes del juego para que me lo actualicen.
+
 ### ➡️ Siguientes pasos
 
+- Finalizar el HUD
+- Hacer puntos de respawn dentro los niveles que tengo.
 - Murciélagos
-- Realizar el HUD
-
-Creo que al acabar el nivel 3 pasare a hacer el sistema de guardado o los menus iniciales. Asi como hacer puntos de respawn dentro los niveles que tengo.
-
-🚧 Acabar la migracion de los Tilemaps (Falta el tilemap de pantano).  
 
 # 🐛 Bugs detectados (pendientes de solución)
 - A veces Foxy recibe daño cuando le salta encima de una zarigueya.
@@ -111,15 +116,17 @@ Creo que al acabar el nivel 3 pasare a hacer el sistema de guardado o los menus 
 # 📊 Planificacion Temporal
 ✅ Configuración de Godot  
 ✅ Migrar Movimiento de Foxy  
-⬜ Migrar TileMaps y Física  
+✅ Migrar TileMap Bosque Esmeralda y Física  
+🔴 Migrar TileMap Bosque Sombrio:  
 ✅ IA básica (Zarigüeya)  
-⬜ Diseñar los 6 niveles: 1️⃣ 2️⃣  
+⬜ Diseñar los 3 niveles Bosque Esmeralda: 1️⃣ 2️⃣  
+🔴 Diseñar los 3 niveles de Bosque Sombrio: 🚧 No creo que me de tiempo a  estos niveles   
 ⬜ Programación de enemigos nuevos  
 ⬜ Desarrollo trampas e interruptores  
 ✅ Gestión de salas secretas  
-⬜ Sistema de habilidades desbloqueables  
-⬜ Sistema de Guardado (JSON)  
-⬜ Crear el Selector de Niveles  
+✅ Sistema de habilidades desbloqueables  
+✅ Sistema de Guardado (JSON)  
+✅ Crear el Selector de Niveles  
 ⬜ Añadir sonido y efectos  
 ⬜ Pruebas y ajustes finales  
 ⬜ Informe Final  

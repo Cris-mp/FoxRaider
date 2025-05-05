@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=4 uid="uid://c6r3mj5ntpko3"]
+[gd_scene load_steps=22 format=4 uid="uid://c6r3mj5ntpko3"]
 
 [ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://assets/tilesets/bosque1.tres" id="1_7107v"]
 [ext_resource type="Script" uid="uid://cb0hpg6kditl2" path="res://scenes/levels/Bosque1Fase3.cs" id="1_cn211"]
+[ext_resource type="PackedScene" uid="uid://cmonnygm473bq" path="res://scenes/tools/HUD.tscn" id="2_0iynv"]
 [ext_resource type="Texture2D" uid="uid://du6t6otftagl2" path="res://assets/backgrounds/b1_f3/1.png" id="2_awe0f"]
 [ext_resource type="PackedScene" uid="uid://bkqhxml7rqx06" path="res://assets/sprites/player/player.tscn" id="2_cn211"]
 [ext_resource type="PackedScene" uid="uid://5pyjvjts2vwy" path="res://scenes/tools/Camera.tscn" id="3_iprp5"]
@@ -23,6 +24,8 @@
 
 [node name="Bosque1Fase3" type="Node2D"]
 script = ExtResource("1_cn211")
+
+[node name="Hud" parent="." instance=ExtResource("2_0iynv")]
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
@@ -172,7 +175,7 @@ limit_bottom = 256
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_cn211")]
-position = Vector2(1024, -208)
+position = Vector2(1040, -224)
 
 [node name="DeathZone" parent="." instance=ExtResource("5_iprp5")]
 position = Vector2(1488, 224)
@@ -182,6 +185,7 @@ scale = Vector2(30, 3)
 position = Vector2(2032, -480)
 scale = Vector2(2, 2)
 ScenePath = "uid://c0tdcdv408r8k"
+NivelDesbloquear = 4
 
 [node name="ZonaControlSecreta" parent="." node_paths=PackedStringArray("tilemapTarget") instance=ExtResource("16_usl7c")]
 position = Vector2(1136, -416)
