@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public partial class HUD : CanvasLayer
+public partial class Hud : CanvasLayer
 {
-    [Export] private Sprite2D lifeSprite;
+    [Export] private AnimatedSprite2D lifeSprite;
     [Export] private Sprite2D teerSprite;
     [Export] private Label scoreLabel;
 
@@ -20,18 +20,27 @@ public partial class HUD : CanvasLayer
 
     public void UpdateLife(int currentHealth)
     {
-        int clamped = Mathf.Clamp(currentHealth, 0, 5);
+        GD.Print($"[HUD] Actualizando vida: {currentHealth}");
+        int clamped = Mathf.Clamp(currentHealth, 0, 6);
+
+        if (!lifeSprite.IsPlaying())
+        lifeSprite.Animation = "vida";
+
+
         lifeSprite.Frame = clamped; // Cambia el frame según la vida
     }
 
     public void UpdateScore(int points)
     {
+        GD.Print($"[HUD] instancia real: {this}, está en escena: {IsInsideTree()}");
         score += points;
         scoreLabel.Text = $"score: {score:0000}";
     }
 
     public void UpdateTeer()
-    {
+    {     
+        GD.Print($"[HUD] instancia real: {this}, está en escena: {IsInsideTree()}");
+        GD.Print($"[HUD] UpdateTeer llamado. Fragments - R:{GameState.HasRedFragment}, G:{GameState.HasGreenFragment}, B:{GameState.HasBlueFragment}");  
         int count = 0;
         if (GameState.HasRedFragment) count++;
         if (GameState.HasGreenFragment) count++;

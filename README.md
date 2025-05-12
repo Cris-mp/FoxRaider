@@ -101,11 +101,21 @@ Se ha revisado y corregido el autoload (Gamestate.cs) para que guarde correctame
 ### HUD
 Se ha iniciado el hud y estoy intentando unir las diferentes partes del juego para que me lo actualicen.
 
+## 📅 12/05/2025: ♥️ HUD Finalizado, 🔄 puntos derespawn y 🦇 inicio de enemigo murcielago
+### HUD
+Se ha implementado la conexión entre el HUD y el estado del juego (GameState), permitiendo que el HUD actualice en tiempo real la vida, la recolección de fragmentos y el puntaje del jugador. También se integró la lógica de recolección de ítems (Fragmento y Cherry) con el HUD.
+### Puntos de respawn
+Se han realizado puntos de respawn mediante un area2d de manera similar a la deathZone o el triguer de cambio de nivel.
+### Murcielago
+Se ha empezado el desarrollo del murcielago pero aun no es funcional.
+
 ### ➡️ Siguientes pasos
 
-- Finalizar el HUD
-- Hacer puntos de respawn dentro los niveles que tengo.
-- Murciélagos
+- Finalizar el murcielago
+- Finalizar el nivel 3
+- Añadir efectos sonoros y musica
+
+Intentare terminar lo descrito y después intentare solucionar los bugs que he ido detectando
 
 # 🐛 Bugs detectados (pendientes de solución)
 - A veces Foxy recibe daño cuando le salta encima de una zarigueya.
@@ -117,12 +127,12 @@ Se ha iniciado el hud y estoy intentando unir las diferentes partes del juego pa
 ✅ Configuración de Godot  
 ✅ Migrar Movimiento de Foxy  
 ✅ Migrar TileMap Bosque Esmeralda y Física  
-🔴 Migrar TileMap Bosque Sombrio:  
+🔴 Migrar TileMap Bosque Sombrio: No prioritario  
 ✅ IA básica (Zarigüeya)  
 ⬜ Diseñar los 3 niveles Bosque Esmeralda: 1️⃣ 2️⃣  
-🔴 Diseñar los 3 niveles de Bosque Sombrio: 🚧 No creo que me de tiempo a  estos niveles   
+🔴 Diseñar los 3 niveles de Bosque Sombrio: No prioritario  
 ⬜ Programación de enemigos nuevos  
-⬜ Desarrollo trampas e interruptores  
+✅ Desarrollo trampas e interruptores  
 ✅ Gestión de salas secretas  
 ✅ Sistema de habilidades desbloqueables  
 ✅ Sistema de Guardado (JSON)  
@@ -131,10 +141,13 @@ Se ha iniciado el hud y estoy intentando unir las diferentes partes del juego pa
 ⬜ Pruebas y ajustes finales  
 ⬜ Informe Final  
 
-## 💻 Aspectos a tener en cuenta
-El proyecto se esta realizando en VSCode con las siguientes extensiones:
-- C# 
-- C# Dev Kit
-- C# Tools for Godot
-- Godot Snippets for C#
-- Godot Docs for C#
+## 💻 Tecnologías y Herramientas
+- <b>Motor</b>: Godot 4
+- <b>Lenguaje</b>: C#
+- <b>Editor</b>: Visual Studio Code
+- <b>Extensiones utilizadas</b>:
+    - C#
+    - C# Dev Kit
+    - C# Tools for Godot
+    - Godot Snippets for C#
+    - Godot Docs for C#

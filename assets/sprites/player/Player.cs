@@ -38,13 +38,16 @@ public partial class Player : CharacterBody2D
     public float LeftLimit;
     public float RightLimit;
 
-    [Signal]public delegate void HealthChangedEventHandler(int newHealth);
+    private Vector2 respawnPoint;
+
+    [Signal] public delegate void HealthChangedEventHandler(int newHealth);
 
     public override void _Ready()
     {
         currentHealth = MaxHealth;
+        respawnPoint = GlobalPosition;
         jumpSound = audioNode.GetNode<AudioStreamPlayer>("Jump");
-        hitSound = audioNode.GetNode<AudioStreamPlayer>("Hit");       
+        hitSound = audioNode.GetNode<AudioStreamPlayer>("Hit");
         HitPoint.AreaEntered += OnHitEnemy;
     }
 
@@ -175,7 +178,6 @@ public partial class Player : CharacterBody2D
     public void TakeDamage(int damage)
     {
         if (isDead) return;
-
         currentHealth -= damage;
         hitSound?.Play(); // Reproducir sonido de daño
         EmitSignal(SignalName.HealthChanged, currentHealth);
@@ -208,7 +210,11 @@ public partial class Player : CharacterBody2D
 
     private void GameOver()
     {
-        GetTree().ReloadCurrentScene();
+        GlobalPosition = respawnPoint;
+        currentHealth = MaxHealth;
+        EmitSignal(SignalName.HealthChanged, currentHealth);
+        isDead = false;
+        anim.Play("Idle");
     }
 
     // Fin de roll (se activa cuando el Timer termina)
@@ -230,5 +236,10 @@ public partial class Player : CharacterBody2D
             // Rebote del jugador al pisar
             Velocity = new Vector2(Velocity.X, -JumpForce / 1.5f); // Rebote más suave
         }
+    }
+
+    public void SetRespawnPoint(Vector2 position)
+    {
+        respawnPoint = position;
     }
 }

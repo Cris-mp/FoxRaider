@@ -79,15 +79,24 @@ public partial class GameState : Node
         SaveGame(); // guardar después de resetear
     }
 
-    public static void CollectFragment(string color)
+    public static void CollectFragment(string color,string nivel)
     {
+        GD.Print($"Foxy recibió cogie el fragmento gs");
         switch (color.ToLower())
         {
             case "red": HasRedFragment = true; break;
             case "green": HasGreenFragment = true; break;
             case "blue": HasBlueFragment = true; break;
         }
-
+        GD.Print($"Foxy recibió cogie el fragmento g {color}{HasRedFragment} {HasGreenFragment} {HasBlueFragment}");
         SaveGame(); // guardar después de recolectar
+
+        var tree = (SceneTree)Engine.GetMainLoop();
+        tree.Root.PrintTreePretty();
+        var hud = (Hud)tree.Root.GetNodeOrNull(nivel+"/Hud");
+        hud?.UpdateTeer();
+GD.Print($"[GameState] HUD instanciado: {hud}, está en escena: {hud?.IsInsideTree()}");
+        
     }
+
 }

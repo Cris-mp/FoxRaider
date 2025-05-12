@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bitjlye81cs6a"]
+
+[ext_resource type="Script" uid="uid://0p8s7etwdudf" path="res://scenes/tools/RespawnArea.cs" id="1_egw7b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ayp5"]
+size = Vector2(47, 44.5)
+
+[node name="RespawnArea" type="Area2D"]
+script = ExtResource("1_egw7b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0ayp5")
+debug_color = Color(0.272723, 0.585652, 0.659728, 0.42)

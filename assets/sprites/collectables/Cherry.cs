@@ -25,6 +25,10 @@ public partial class Cherry : Area2D
             AnimatedSprite.Play("Collect");
             FeedSound?.Play();
             isCollected = true;
+            var tree = (SceneTree)Engine.GetMainLoop();
+            var hud = (Hud)tree.Root.GetNodeOrNull(body.GetParent().Name + "/Hud"); // Ajusta la ruta
+            hud?.UpdateScore(Points);
+            GD.Print($"[HUD] instancia real: {this}, está en escena: {IsInsideTree()}{body.GetParent().Name}");
         }
     }
 

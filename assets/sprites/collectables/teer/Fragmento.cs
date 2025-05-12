@@ -4,6 +4,7 @@ using System;
 public partial class Fragmento : Area2D
 {
     [Export] public string Color; // "red", "green", "blue"
+    [Export] public string nivel; 
     [Export] public Texture2D FragmentTexture;
 
     private Sprite2D sprite;
@@ -20,7 +21,7 @@ public partial class Fragmento : Area2D
     {
         if (body is Player)
         {
-            GameState.CollectFragment(Color);
+            GameState.CollectFragment(Color,nivel);
             
             QueueFree();
         }

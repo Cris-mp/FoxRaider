@@ -1,13 +1,77 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmonnygm473bq"]
+[gd_scene load_steps=16 format=3 uid="uid://cmonnygm473bq"]
 
 [ext_resource type="Script" uid="uid://d11owq1rlkwve" path="res://scenes/tools/Hud.cs" id="1_sjdmv"]
 [ext_resource type="Theme" uid="uid://bk801t0ou0e8v" path="res://scenes/ui/theme.tres" id="2_2om6i"]
+[ext_resource type="Texture2D" uid="uid://ct524t7objekx" path="res://assets/sprites/collectables/teer/empy_blue.png" id="3_2gguq"]
 [ext_resource type="Texture2D" uid="uid://dxjrysoijstvb" path="res://scenes/tools/heart.png" id="3_2om6i"]
 [ext_resource type="Texture2D" uid="uid://dh53hov4kmn41" path="res://assets/sprites/collectables/teer/empy-teer.png" id="4_b8kyt"]
+[ext_resource type="Texture2D" uid="uid://bmeyn0ho0a6gi" path="res://assets/sprites/collectables/teer/empy_green_blue.png" id="4_gpp6d"]
+[ext_resource type="Texture2D" uid="uid://2yg2kpcwcpic" path="res://assets/sprites/collectables/teer/full-teer.png" id="5_fj11h"]
 
-[node name="Hud" type="CanvasLayer"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeqef"]
+atlas = ExtResource("3_2om6i")
+region = Rect2(0, 66, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj11h"]
+atlas = ExtResource("3_2om6i")
+region = Rect2(0, 55, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpp6d"]
+atlas = ExtResource("3_2om6i")
+region = Rect2(0, 44, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gguq"]
+atlas = ExtResource("3_2om6i")
+region = Rect2(0, 33, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsdv8"]
+atlas = ExtResource("3_2om6i")
+region = Rect2(0, 22, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8kyt"]
+atlas = ExtResource("3_2om6i")
+region = Rect2(0, 11, 33, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2om6i"]
+atlas = ExtResource("3_2om6i")
+region = Rect2(0, 0, 33, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0k7w8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeqef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj11h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpp6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gguq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsdv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8kyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2om6i")
+}],
+"loop": false,
+"name": &"vida",
+"speed": 5.0
+}]
+
+[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("lifeSprite", "teerSprite", "scoreLabel")]
 process_mode = 3
 script = ExtResource("1_sjdmv")
+lifeSprite = NodePath("PanelContainer/SptLife")
+teerSprite = NodePath("PanelContainer/SprtTeer")
+scoreLabel = NodePath("PanelContainer/HBoxContainer/lblScore")
+teerStates = Array[Texture2D]([ExtResource("4_b8kyt"), ExtResource("3_2gguq"), ExtResource("4_gpp6d"), ExtResource("5_fj11h")])
 
 [node name="PanelContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -19,13 +83,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_2om6i")
 
-[node name="SptLife" type="Sprite2D" parent="PanelContainer"]
-position = Vector2(26, 11)
-texture = ExtResource("3_2om6i")
-vframes = 7
+[node name="SptLife" type="AnimatedSprite2D" parent="PanelContainer"]
+position = Vector2(22, 10)
+sprite_frames = SubResource("SpriteFrames_0k7w8")
+animation = &"vida"
 
 [node name="SprtTeer" type="Sprite2D" parent="PanelContainer"]
-position = Vector2(371, 11)
+position = Vector2(370, 10)
 texture = ExtResource("4_b8kyt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
@@ -33,16 +97,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 8
-text = "Score:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="lblScore" type="Label" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "0000"
+vertical_alignment = 1

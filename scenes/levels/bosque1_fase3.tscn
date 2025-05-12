@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://c6r3mj5ntpko3"]
+[gd_scene load_steps=23 format=4 uid="uid://c6r3mj5ntpko3"]
 
 [ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://assets/tilesets/bosque1.tres" id="1_7107v"]
 [ext_resource type="Script" uid="uid://cb0hpg6kditl2" path="res://scenes/levels/Bosque1Fase3.cs" id="1_cn211"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://doumy3wp7x6qh" path="res://assets/sprites/platforms/movingPlatform/movingPlatform.tscn" id="18_35fc6"]
 [ext_resource type="PackedScene" uid="uid://d4ctki4ty6qxm" path="res://assets/sprites/platforms/fallingPlatform/fallingPlatform.tscn" id="19_nq04e"]
 [ext_resource type="PackedScene" uid="uid://c2hpg3dowilww" path="res://assets/sprites/traps/Spikes/spike.tscn" id="20_6ri6b"]
+[ext_resource type="PackedScene" uid="uid://bitjlye81cs6a" path="res://scenes/tools/RespawnArea.tscn" id="22_ct7jy"]
 
 [node name="Bosque1Fase3" type="Node2D"]
 script = ExtResource("1_cn211")
@@ -277,3 +278,20 @@ position = Vector2(625, -208)
 [node name="Spike" parent="." instance=ExtResource("20_6ri6b")]
 position = Vector2(472, -176)
 region_rect = Rect2(0, 0, 864, 10)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="RespawnArea" parent="Node2D" instance=ExtResource("22_ct7jy")]
+position = Vector2(1049, 153)
+
+[node name="RespawnArea2" parent="Node2D" instance=ExtResource("22_ct7jy")]
+position = Vector2(1786, 104)
+
+[node name="RespawnArea3" parent="Node2D" instance=ExtResource("22_ct7jy")]
+position = Vector2(2018, -136)
+
+[node name="RespawnArea4" parent="Node2D" instance=ExtResource("22_ct7jy")]
+position = Vector2(1044, -231)
+
+[node name="RespawnArea5" parent="Node2D" instance=ExtResource("22_ct7jy")]
+position = Vector2(233, -357)
