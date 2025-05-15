@@ -307,7 +307,7 @@ height = 22.0
 radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5c73"]
-size = Vector2(13, 3)
+size = Vector2(7, 3)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "rollTimer", "audioNode", "Collision", "CollisionRoll", "HitPoint")]
 collision_mask = 6

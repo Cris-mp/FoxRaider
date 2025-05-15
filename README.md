@@ -109,13 +109,19 @@ Se han realizado puntos de respawn mediante un area2d de manera similar a la dea
 ### Murcielago
 Se ha empezado el desarrollo del murcielago pero aun no es funcional.
 
+## 📅 15/05/2025: 🦇 Finalizado Murcielago y 💎 Diseño de Nivel 3
+### Murcielago
+Se ha finalizado el murcielago. Al llegar a la altura de Foxy, si este lo pasa cambia inmediatamente de direccion, he intentado arreglarlo pero no he conseguido nada.
+### Finalizado el nivel 3
+Se han introducido la parte final del nivel 3 y se han añadido enemigos y coleccionables
+### Añadir musica
+Se han añadido las musicas de los escenarios
+
+✏️ También he comenzado a documentar algunas partes
+
 ### ➡️ Siguientes pasos
-
-- Finalizar el murcielago
-- Finalizar el nivel 3
-- Añadir efectos sonoros y musica
-
-Intentare terminar lo descrito y después intentare solucionar los bugs que he ido detectando
+- Añadir efectos sonoros 
+- Corregir bugs:
 
 # 🐛 Bugs detectados (pendientes de solución)
 - A veces Foxy recibe daño cuando le salta encima de una zarigueya.
@@ -129,9 +135,9 @@ Intentare terminar lo descrito y después intentare solucionar los bugs que he i
 ✅ Migrar TileMap Bosque Esmeralda y Física  
 🔴 Migrar TileMap Bosque Sombrio: No prioritario  
 ✅ IA básica (Zarigüeya)  
-⬜ Diseñar los 3 niveles Bosque Esmeralda: 1️⃣ 2️⃣  
+✅ Diseñar los 3 niveles Bosque Esmeralda: 1️⃣ 2️⃣ 3️⃣  
 🔴 Diseñar los 3 niveles de Bosque Sombrio: No prioritario  
-⬜ Programación de enemigos nuevos  
+✅ Programación de enemigos nuevos  
 ✅ Desarrollo trampas e interruptores  
 ✅ Gestión de salas secretas  
 ✅ Sistema de habilidades desbloqueables  

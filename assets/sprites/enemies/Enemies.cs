@@ -34,8 +34,6 @@ public partial class Enemies : CharacterBody2D
     }
     protected virtual void OnDie() { }
 
-
-
     public bool IsDead() => isDead;
 }
 

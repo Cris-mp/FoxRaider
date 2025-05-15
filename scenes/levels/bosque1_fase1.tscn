@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://c0tdcdv408r8k"]
+[gd_scene load_steps=12 format=4 uid="uid://c0tdcdv408r8k"]
 
 [ext_resource type="PackedScene" uid="uid://5pyjvjts2vwy" path="res://scenes/tools/Camera.tscn" id="1_dlr3r"]
 [ext_resource type="Texture2D" uid="uid://dqhnad8b14d1e" path="res://assets/backgrounds/b1_f1/back.png" id="1_s6gyn"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ceh8s3ydsvpt3" path="res://assets/sprites/enemies/zarigueya/Zarigueya.tscn" id="6_k8hws"]
 [ext_resource type="PackedScene" uid="uid://db83odfpemnlc" path="res://assets/sprites/collectables/cherry.tscn" id="8_n6ct5"]
 [ext_resource type="PackedScene" uid="uid://cgtdw8oq1f4fl" path="res://scenes/tools/TriggerCambioNivel.tscn" id="9_ta5bg"]
+[ext_resource type="AudioStream" uid="uid://dqvaykggar6iw" path="res://assets/audio/music/world wanderer.ogg" id="11_2js6x"]
 
 [node name="Bosque1Fase1" type="Node2D"]
 y_sort_enabled = true
@@ -189,3 +190,9 @@ scale = Vector2(1.5, 1)
 ScenePath = "uid://cicekm8xkcwn8"
 desbloquearDobleSalto = true
 NivelDesbloquear = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_2js6x")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true

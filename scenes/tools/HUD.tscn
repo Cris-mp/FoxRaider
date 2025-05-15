@@ -1,12 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cmonnygm473bq"]
+[gd_scene load_steps=19 format=3 uid="uid://cmonnygm473bq"]
 
 [ext_resource type="Script" uid="uid://d11owq1rlkwve" path="res://scenes/tools/Hud.cs" id="1_sjdmv"]
 [ext_resource type="Theme" uid="uid://bk801t0ou0e8v" path="res://scenes/ui/theme.tres" id="2_2om6i"]
-[ext_resource type="Texture2D" uid="uid://ct524t7objekx" path="res://assets/sprites/collectables/teer/empy_blue.png" id="3_2gguq"]
+[ext_resource type="Texture2D" uid="uid://dxqgeixbiapgr" path="res://assets/sprites/collectables/teer/empy_red.png" id="3_2gguq"]
 [ext_resource type="Texture2D" uid="uid://dxjrysoijstvb" path="res://scenes/tools/heart.png" id="3_2om6i"]
 [ext_resource type="Texture2D" uid="uid://dh53hov4kmn41" path="res://assets/sprites/collectables/teer/empy-teer.png" id="4_b8kyt"]
-[ext_resource type="Texture2D" uid="uid://bmeyn0ho0a6gi" path="res://assets/sprites/collectables/teer/empy_green_blue.png" id="4_gpp6d"]
+[ext_resource type="Texture2D" uid="uid://dcyci52p3jrqb" path="res://assets/sprites/collectables/teer/empy_blue_red.png" id="4_gpp6d"]
+[ext_resource type="Texture2D" uid="uid://ff13abj5gay4" path="res://assets/sprites/collectables/teer/empy_green.png" id="4_qeqef"]
+[ext_resource type="Texture2D" uid="uid://dobaguqxc2uct" path="res://assets/sprites/collectables/teer/empy_green_red.png" id="5_0k7w8"]
 [ext_resource type="Texture2D" uid="uid://2yg2kpcwcpic" path="res://assets/sprites/collectables/teer/full-teer.png" id="5_fj11h"]
+[ext_resource type="Texture2D" uid="uid://ct524t7objekx" path="res://assets/sprites/collectables/teer/empy_blue.png" id="6_4n402"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qeqef"]
 atlas = ExtResource("3_2om6i")
@@ -71,7 +74,7 @@ script = ExtResource("1_sjdmv")
 lifeSprite = NodePath("PanelContainer/SptLife")
 teerSprite = NodePath("PanelContainer/SprtTeer")
 scoreLabel = NodePath("PanelContainer/HBoxContainer/lblScore")
-teerStates = Array[Texture2D]([ExtResource("4_b8kyt"), ExtResource("3_2gguq"), ExtResource("4_gpp6d"), ExtResource("5_fj11h")])
+teerStates = Array[Texture2D]([ExtResource("4_b8kyt"), ExtResource("3_2gguq"), ExtResource("4_qeqef"), ExtResource("5_0k7w8"), ExtResource("6_4n402"), ExtResource("4_gpp6d"), ExtResource("5_0k7w8"), ExtResource("5_fj11h")])
 
 [node name="PanelContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

@@ -30,6 +30,16 @@ public partial class Zarigueya : Enemies
             ChangeDirection();
 
         MoveAndSlide();
+
+        for (int i = 0; i < GetSlideCollisionCount(); i++)
+    {
+        KinematicCollision2D collision = GetSlideCollision(i);
+        if (collision.GetCollider() is Enemies enemy && enemy != this)
+        {
+            ChangeDirection();
+            break;
+        }
+    }
         SetAnimationState("Run");
     }
 

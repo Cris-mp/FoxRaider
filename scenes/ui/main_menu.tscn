@@ -169,3 +169,4 @@ texture_disabled = ExtResource("26_qpknu")
 stream = ExtResource("3_1g8jr")
 volume_db = -10.0
 autoplay = true
+parameters/looping = true

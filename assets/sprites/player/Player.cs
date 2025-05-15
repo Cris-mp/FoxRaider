@@ -28,7 +28,7 @@ public partial class Player : CharacterBody2D
 
     // Estado del personaje
     private int currentHealth;
-    private bool canDoubleJump = GameState.HasDoubleJump;
+    private bool canDoubleJump = true;//GameState.HasDoubleJump;
     private bool doubleJump = false;
     private bool canWallGrab = GameState.HasWallGrab;
     private bool isRolling = false;
