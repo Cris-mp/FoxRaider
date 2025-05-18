@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://dke6urkp80q2t"]
+[gd_scene load_steps=22 format=3 uid="uid://dke6urkp80q2t"]
 
 [ext_resource type="Script" uid="uid://2hk7im3jjx80" path="res://scripts/enemies/Murcielago.cs" id="1_hquwe"]
 [ext_resource type="Texture2D" uid="uid://b4s5tthe7ygr2" path="res://assets/sprites/enemies/murcielago/bat-sheet.png" id="2_b783s"]
 [ext_resource type="Texture2D" uid="uid://c3i0oe0486qs4" path="res://assets/sprites/enemies/murcielago/spritesheet.png" id="3_b783s"]
+[ext_resource type="AudioStream" uid="uid://4uphllbb3063" path="res://assets/audio/sounds/player/Impact.ogg" id="4_55dxv"]
 
 [sub_resource type="Animation" id="Animation_ynf1w"]
 resource_name = "Dead"
@@ -169,7 +170,7 @@ size = Vector2(13.5, 13)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b783s"]
 size = Vector2(21, 21)
 
-[node name="Murcielago" type="CharacterBody2D" node_paths=PackedStringArray("animationTree", "sprite", "FrontHitbox")]
+[node name="Murcielago" type="CharacterBody2D" node_paths=PackedStringArray("animationTree", "sprite", "FrontHitbox", "DeathSound")]
 collision_layer = 8
 collision_mask = 15
 motion_mode = 1
@@ -177,6 +178,7 @@ script = ExtResource("1_hquwe")
 animationTree = NodePath("Sprite2D/AnimationBatTree")
 sprite = NodePath("Sprite2D")
 FrontHitbox = NodePath("Sprite2D/FrontHitbox")
+DeathSound = NodePath("death")
 AlturaDescenso = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -205,6 +207,9 @@ shape = SubResource("RectangleShape2D_qx4pr")
 light_mask = 0
 position = Vector2(2, 4)
 shape = SubResource("RectangleShape2D_b783s")
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_55dxv")
 
 [connection signal="animation_finished" from="Sprite2D/AnimationBatTree" to="." method="OnAnimationFinished"]
 [connection signal="body_entered" from="Sprite2D/FrontHitbox" to="." method="OnFrontHit"]

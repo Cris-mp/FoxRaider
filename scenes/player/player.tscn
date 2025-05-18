@@ -198,8 +198,14 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2g7uh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvo51")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2g7uh")
 }],
-"loop": true,
+"loop": false,
 "name": &"Hurt",
 "speed": 8.0
 }, {
@@ -328,10 +334,10 @@ HitPoint = NodePath("HitPoint")
 texture_filter = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_m188g")
-animation = &"Idle"
+animation = &"Hurt"
 autoplay = "Idle"
-frame = 1
-frame_progress = 0.729571
+frame = 3
+frame_progress = 1.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)

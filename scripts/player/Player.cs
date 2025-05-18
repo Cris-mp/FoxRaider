@@ -42,6 +42,7 @@ public partial class Player : CharacterBody2D
 	private bool isRolling = false;
 	private bool isDead = false;
 	private bool wasOnFloor = false;
+	private bool isHurting = false;
 	private Vector2 velocity;
 
 	// Habilidades desbloqueables
@@ -250,6 +251,10 @@ public partial class Player : CharacterBody2D
 	/// <summary>Actualiza las animaciones de Foxy según su estado.</summary>
 	private void UpdateAnimation()
 	{
+
+		if (isHurting)
+		return;
+		
 		if (isRolling)
 			anim.Play("Roll");
 		else if (IsOnWall() && canWallGrab)
@@ -260,22 +265,24 @@ public partial class Player : CharacterBody2D
 			anim.Play("Run");
 		else
 			anim.Play("Idle");
-
 		if (velocity.X != 0)
 			anim.FlipH = velocity.X < 0;
 	}
 	#endregion
 
-	#region === DAÑO Y VIDA ===
+	#region === DAÑO Y VIDA ===	
 	/// <summary>Aplica daño a Foxy.</summary>
 	public void TakeDamage(int damage)
 	{
-		if (isDead) return;
+		if (isDead || isHurting) return;
 
+		isHurting = true;
+		anim.Play("Hurt");
 		currentHealth -= damage;
 		hitSound?.Play();
 		EmitSignal(SignalName.HealthChanged, currentHealth);
 		GD.Print($"Foxy recibió daño, vida actual: {currentHealth}");
+		GetTree().CreateTimer(0.4f).Timeout += () => isHurting = false;
 
 		if (currentHealth <= 0)
 			Die();
