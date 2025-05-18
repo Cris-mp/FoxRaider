@@ -22,3 +22,5 @@ position = Vector2(0, -10)
 position = Vector2(8, 5)
 shape = SubResource("RectangleShape2D_rduhq")
 debug_color = Color(0.983931, 0.378869, 0.376895, 0.42)
+
+[connection signal="body_entered" from="AreaSpike" to="." method="OnBodyEntered"]

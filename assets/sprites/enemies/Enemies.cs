@@ -22,7 +22,7 @@ public partial class Enemies : CharacterBody2D
         if (currentHealth <= 0)
         {
             isDead = true;
-            OnDie(); // Hook para clases hijas
+            OnDie();
             Die();
         }
     }

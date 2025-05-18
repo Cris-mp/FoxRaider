@@ -14,28 +14,23 @@ public partial class TriggerCambioNivel : Area2D
     [Export(PropertyHint.File, "*.tscn")]
     public string ScenePath = "";
 
+    [ExportGroup("Habilidades desbloqueanbles")]
     /// <summary>
     /// Si está activado, se desbloqueará la habilidad de doble salto al entrar.
     /// </summary>
     [Export] public bool desbloquearDobleSalto = false;
-    
+
     /// <summary>
     /// Si está activado, se desbloqueará la habilidad de agarrarse a paredes al entrar.
     /// </summary>
     [Export] public bool desbloquearPared = false;
 
+    [ExportGroup("Nivel")]
     /// <summary>
     /// Nivel que se marcará como desbloqueado si aún no lo está.
     /// </summary>
     [Export] public int NivelDesbloquear = 1;
-
-    /// <summary>
-    /// Conecta la señal de entrada de cuerpo al inicializar el nodo.
-    /// </summary>
-    public override void _Ready()
-    {
-        BodyEntered += OnBodyEntered;
-    }
+    
     /// <summary>
     /// Evento que se dispara cuando un cuerpo entra en el área.
     /// Si el cuerpo es el jugador, se aplican mejoras y se inicia el cambio de escena.
@@ -69,7 +64,7 @@ public partial class TriggerCambioNivel : Area2D
     {
         if (NivelDesbloquear > GameState.MaxLevelUnlocked)
         {
-            GameState.MaxLevelUnlocked = NivelDesbloquear;            
+            GameState.MaxLevelUnlocked = NivelDesbloquear;
         }
 
         GameState.SaveGame();

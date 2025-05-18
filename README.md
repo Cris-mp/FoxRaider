@@ -119,15 +119,33 @@ Se han añadido las musicas de los escenarios
 
 ✏️ También he comenzado a documentar algunas partes
 
+## 📅 17/05/2025: 🐛 Correción de bugs, mejoras y ✏️ documentacion
+
+### 🐛 No se establece animacion de saltar cuando Foxy esta en contacto con la pared.
+La animacion "Jump" solo se establecia cuando foxy no estaba en el suelo y no estaba en una pared,asi que hora se permite la animación "Jump" si el jugador va hacia arriba aunque esté en una pared.
+
+### 🐛 Si Foxy termina de rodar en una zona estrecha se queda atascado.
+Ahora evito que la colisión grande se reactive cuando Foxy termina de rodar dentro de un espacio estrecho. Para ello verifico que hay espacio libre usando TestMove
+
+### 🐛 Al caer no se me activa el salto. Solucionado
+La variable doubleJump no se me reinciaba correctamente asi que ahora la reinicio siempre al tocar el suelo.
+
+### ➕ Mejoras
+- Ahora las plataformas caen y vibran antes de caer
+- Se ha modificado la camara para que coja los limites superior e inferior del mapa.
+- Se ha modificado el menu haciendo la creacion de botones de forma dinamica mediante el aprovechamiento de los export y la creacion de recursos.
+
+### Documentación
+Se ha limpiado codigo y ordenado algunas clases. Ademas se han comentado las clases y se ha hecho un mejor uso del inspector de Godot.
+
+
 ### ➡️ Siguientes pasos
+- Acabar de documentar y limpiar codigo. Me queda por repasar los enemigos y comentar la clase Player.
 - Añadir efectos sonoros 
 - Corregir bugs:
-
 # 🐛 Bugs detectados (pendientes de solución)
 - A veces Foxy recibe daño cuando le salta encima de una zarigueya.
-- No se establece animacion de saltar cuando Foxy esta en contacto con la pared.
-- Si Foxy termina de rodar en una zona estrecha se queda atascado.
-- Al caer no se me activa el salto
+
 
 # 📊 Planificacion Temporal
 ✅ Configuración de Godot  

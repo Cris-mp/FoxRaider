@@ -28,8 +28,11 @@
 [ext_resource type="PackedScene" uid="uid://dke6urkp80q2t" path="res://assets/sprites/enemies/murcielago/Murcielago.tscn" id="23_eayra"]
 [ext_resource type="AudioStream" uid="uid://b2n31aue2tcnf" path="res://assets/audio/music/exploration.ogg" id="24_cki7k"]
 
-[node name="Bosque1Fase3" type="Node2D"]
+[node name="Bosque1Fase3" type="Node2D" node_paths=PackedStringArray("player", "camera", "hud")]
 script = ExtResource("1_cn211")
+player = NodePath("Player")
+camera = NodePath("Camera")
+hud = NodePath("Hud")
 
 [node name="Hud" parent="." instance=ExtResource("2_0iynv")]
 
@@ -224,7 +227,7 @@ limit_bottom = 256
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_cn211")]
-position = Vector2(878, -639)
+position = Vector2(160, 144)
 
 [node name="DeathZone" parent="." instance=ExtResource("5_iprp5")]
 position = Vector2(1488, 224)
@@ -234,6 +237,8 @@ scale = Vector2(30, 3)
 position = Vector2(2032, -480)
 scale = Vector2(2, 2)
 ScenePath = "uid://c0tdcdv408r8k"
+desbloquearDobleSalto = true
+desbloquearPared = true
 NivelDesbloquear = 4
 
 [node name="ZonaControlSecreta" parent="." node_paths=PackedStringArray("tilemapTarget") instance=ExtResource("16_usl7c")]
@@ -382,10 +387,10 @@ position = Vector2(1033, -230)
 position = Vector2(232, -358)
 
 [node name="RespawnArea6" parent="Node2D" instance=ExtResource("22_ct7jy")]
-position = Vector2(872, -648)
+position = Vector2(872, -646)
 
 [node name="RespawnArea7" parent="Node2D" instance=ExtResource("22_ct7jy")]
-position = Vector2(872, -648)
+position = Vector2(231, -647)
 
 [node name="RespawnArea8" parent="Node2D" instance=ExtResource("22_ct7jy")]
 position = Vector2(1432, -438)

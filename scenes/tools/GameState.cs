@@ -139,8 +139,7 @@ public partial class GameState : Node
 
         SaveGame();
 
-        var tree = (SceneTree)Engine.GetMainLoop();
-        tree.Root.PrintTreePretty();
+        var tree = (SceneTree)Engine.GetMainLoop();       
         var hud = (Hud)tree.Root.GetNodeOrNull(nivel + "/Hud");
         hud?.UpdateTeer();
     }

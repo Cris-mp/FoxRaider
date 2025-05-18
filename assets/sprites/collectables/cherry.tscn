@@ -90,10 +90,11 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oxudi"]
 
-[node name="Cherry" type="Area2D" node_paths=PackedStringArray("AnimatedSprite")]
+[node name="Cherry" type="Area2D" node_paths=PackedStringArray("AnimatedSprite", "FeedSound")]
 collision_layer = 0
 script = ExtResource("1_oxudi")
 AnimatedSprite = NodePath("AnimatedSprite2D")
+FeedSound = NodePath("Feed")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qenyg")

@@ -182,7 +182,7 @@ AlturaDescenso = 30.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_b783s")
 hframes = 7
-frame = 5
+frame = 4
 
 [node name="AnimationBat" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

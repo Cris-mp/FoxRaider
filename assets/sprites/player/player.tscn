@@ -309,14 +309,15 @@ radius = 7.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5c73"]
 size = Vector2(7, 3)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "rollTimer", "audioNode", "Collision", "CollisionRoll", "HitPoint")]
-collision_mask = 6
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "rollTimer", "jumpSound", "hitSound", "Collision", "CollisionRoll", "HitPoint")]
+collision_mask = 14
 platform_floor_layers = 4294967042
 platform_wall_layers = 4
 script = ExtResource("1_5y3cv")
 anim = NodePath("Sprite")
 rollTimer = NodePath("rollTimer")
-audioNode = NodePath("Audio")
+jumpSound = NodePath("Audio/Jump")
+hitSound = NodePath("Audio/Hit")
 Collision = NodePath("Collision")
 CollisionRoll = NodePath("CollisionRoll")
 HitPoint = NodePath("HitPoint")

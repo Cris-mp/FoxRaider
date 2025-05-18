@@ -11,17 +11,7 @@ public partial class ZonaControl : Area2D
     /// al entrar o salir de la zona.
     /// </summary>
     [Export] public TileMapLayer tilemapTarget;
-
-    /// <summary>
-    /// Método que se ejecuta al inicializar el nodo.
-    /// Conecta las señales BodyEntered y BodyExited a sus respectivos métodos.
-    /// </summary>
-    public override void _Ready()
-    {
-        BodyEntered += OnBodyEntered;
-        BodyExited += OnBodyExited;
-    }
-
+ 
     /// <summary>
     /// Evento llamado cuando un cuerpo entra en la zona.
     /// Si el cuerpo es un jugador y existe una capa TileMap asociada,

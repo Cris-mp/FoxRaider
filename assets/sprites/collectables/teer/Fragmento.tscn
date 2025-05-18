@@ -5,13 +5,16 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pqhtw"]
 
-[node name="Fragmento" type="Area2D"]
+[node name="Fragmento" type="Area2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_i6s60")
 Color = "blue"
 FragmentTexture = ExtResource("2_bqvqm")
+sprite = NodePath("Sprite")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pqhtw")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_bqvqm")
+
+[connection signal="body_entered" from="." to="." method="OnCollected"]

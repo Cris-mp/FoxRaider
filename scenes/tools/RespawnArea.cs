@@ -2,15 +2,7 @@ using Godot;
 using System;
 
 public partial class RespawnArea : Area2D
-{
-    /// <summary>
-    /// Conecta la señal de entrada de cuerpo al inicializar el nodo.
-    /// </summary>
-    public override void _Ready()
-    {
-        BodyEntered += OnBodyEntered;
-    }
-
+{  
     /// <summary>
     /// Evento que se dispara cuando un cuerpo entra en el área.
     /// Si el cuerpo es el jugador, se guarda la posicion del jugador como punto de respawn.

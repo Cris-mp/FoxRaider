@@ -1,145 +1,222 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
-    // Parámetros configurables
+    #region === CONFIGURACIÓN EXPORTADA ===
+    [ExportGroup("Movimiento")]
     [Export] public float Speed = 100f;
     [Export] public float JumpForce = 200f;
     [Export] public float Gravity = 500f;
     [Export] public float RollSpeed = 150f;
-    [Export] public float DeathYThreshold = 500f;
     [Export] public float WallClimbSpeed = 50f;
+
+    [ExportGroup("Muerte y Vida")]
     [Export] public int MaxHealth = 6;
+    [Export] public float DeathYThreshold = 500f;
 
+    [ExportGroup("Límites del Nivel")]
+    [Export] public float LeftLimit;
+    [Export] public float RightLimit;
 
-
-
-    // Referencias asignadas en el editor
+    [ExportGroup("Referencias de Nodo")]
     [Export] public AnimatedSprite2D anim;
     [Export] public Timer rollTimer;
-    [Export] public Node audioNode;
+    [Export] public AudioStreamPlayer jumpSound;
+    [Export] public AudioStreamPlayer hitSound;
     [Export] public CollisionShape2D Collision;
     [Export] public CollisionShape2D CollisionRoll;
     [Export] public Area2D HitPoint;
+    #endregion
 
-    // Audios
-    private AudioStreamPlayer jumpSound;
-    private AudioStreamPlayer hitSound;
-
-    // Estado del personaje
+    #region === ESTADO INTERNO ===
     private int currentHealth;
-    private bool canDoubleJump = true;//GameState.HasDoubleJump;
     private bool doubleJump = false;
-    private bool canWallGrab = GameState.HasWallGrab;
     private bool isRolling = false;
     private bool isDead = false;
+    private bool wasOnFloor = false;
+    private Vector2 velocity;
 
-    // Límites de movimiento
-    public float LeftLimit;
-    public float RightLimit;
+    // Habilidades desbloqueables
+    private bool canDoubleJump = GameState.HasDoubleJump;
+    private bool canWallGrab = GameState.HasWallGrab;
 
     private Vector2 respawnPoint;
 
-    [Signal] public delegate void HealthChangedEventHandler(int newHealth);
+    private float moveDirection;
+    private bool jumpPressed;
+    private bool rollPressed;
+    #endregion
 
+    #region === SEÑALES ===
+    [Signal] public delegate void HealthChangedEventHandler(int newHealth);
+    #endregion
+
+    #region === READY ===
     public override void _Ready()
     {
         currentHealth = MaxHealth;
         respawnPoint = GlobalPosition;
-        jumpSound = audioNode.GetNode<AudioStreamPlayer>("Jump");
-        hitSound = audioNode.GetNode<AudioStreamPlayer>("Hit");
         HitPoint.AreaEntered += OnHitEnemy;
     }
+    #endregion
 
+    #region === BUCLE PRINCIPAL ===
     public override void _PhysicsProcess(double delta)
     {
         if (isDead) return;
 
-        Vector2 velocity = Velocity;
-        bool isOnFloor = IsOnFloor();
-        bool isOnWall = IsOnWall();
-        float direction = Input.GetAxis("move_left", "move_right");
+        ReadInput();
+        UpdateGroundState();
+        ApplyGravity(delta);
+        HandleMovement();
+        HandleJump();
+        HandleWallGrab();
+        HandleRoll();
+        CheckDeathZone();
+        ClampToLevelBounds();
+        ApplyVelocity();
+    }
 
-        // Aplicar gravedad
-        if (!isOnFloor && !(isOnWall && canWallGrab))
-            velocity.Y += Gravity * (float)delta;
+    public override void _Process(double delta)
+    {
+        if (isDead) return;
+        UpdateAnimation();
+    }
+    #endregion
 
-        // Movimiento horizontal (excepto si está rodando)
+    #region === ENTRADA ===
+    private void ReadInput()
+    {
+        moveDirection = Input.GetAxis("move_left", "move_right");
+        jumpPressed = Input.IsActionJustPressed("jump");
+        rollPressed = Input.IsActionJustPressed("roll");
+    }
+    #endregion
+
+    #region === MOVIMIENTO Y GRAVEDAD ===
+    private void UpdateGroundState()
+    {
+        if (IsOnFloor() && !wasOnFloor)
+            doubleJump = true;
+
+        wasOnFloor = IsOnFloor();
+    }
+
+    private void ApplyGravity(double delta)
+{
+    if (!IsOnFloor() && !(IsOnWall() && canWallGrab))
+    {      
+
+        velocity.Y += Gravity * (float)delta;
+
+        // Limitar la velocidad de caída máxima
+        float maxFallSpeed = 800f;
+        velocity.Y = Mathf.Min(velocity.Y, maxFallSpeed);
+    }
+}
+
+    private void HandleMovement()
+    {
         if (!isRolling)
-            velocity.X = direction * Speed;
+            velocity.X = moveDirection * Speed;
+    }
 
-        // Salto y doble salto
-        if (Input.IsActionJustPressed("jump"))
-        {
-            if (isOnFloor) // Salto normal desde el suelo
-            {
-                velocity.Y = -JumpForce;
-                doubleJump = true;
-                jumpSound?.Play();
-            }
-            else if (canDoubleJump && doubleJump) // Doble salto si la habilidad está desbloqueada
-            {
-                velocity.Y = -JumpForce;
-                doubleJump = false;
-                jumpSound?.Play();
-            }
-            else if (isOnWall && canWallGrab) // Salto en la pared
-            {
-                velocity.Y = -JumpForce; // Salto hacia arriba
-
-                if (anim.FlipH) // Si está mirando a la izquierda, salta hacia la derecha
-                    velocity.X = Speed;
-                else // Si está mirando a la derecha, salta hacia la izquierda
-                    velocity.X = -Speed;
-                canWallGrab = false; // Desactivar agarre momentáneamente para evitar que se pegue a la pared tras saltar
-                GetTree().CreateTimer(0.2f).Timeout += () => canWallGrab = true; // Reactivar después de 0.2 segundos
-
-                jumpSound?.Play();
-            }
-        }
-
-        // Agarrarse a la pared (sin escalar automáticamente)
-        // Agarrarse a la pared (si la habilidad está desbloqueada)
-        if (isOnWall && canWallGrab)
-        {
-            if (!Input.IsActionPressed("move_up") && !Input.IsActionPressed("move_down"))
-            {
-                velocity.Y = Gravity * 0.1f; // Deslizarse lentamente hacia abajo
-            }
-
-            // Si el jugador presiona "arriba", sube lentamente
-            if (Input.IsActionPressed("move_up"))
-            {
-                velocity.Y = -WallClimbSpeed; // Sube lentamente
-            }
-
-        }
-
-        // Rodar (Dash rápido en el suelo)
-        if (Input.IsActionJustPressed("roll") && isOnFloor && !isRolling)
-        {
-            isRolling = true;
-            velocity.X = RollSpeed * (direction != 0 ? direction : 1);
-            Collision.Disabled = true;  // Desactiva la colisión grande
-            CollisionRoll.Disabled = false;   // Activa la colisión pequeña
-            rollTimer.Start();
-        }
-
-        // Detectar caída fuera del nivel
-        if (GlobalPosition.Y > DeathYThreshold)
-        {
-            TakeDamage(6); // Pierde toda la vida
-        }
-
-        Vector2 position = GlobalPosition;
-
-        // Limitar a Foxy dentro de los bordes del nivel
-        position.X = Mathf.Clamp(position.X, LeftLimit, RightLimit);
-
-        GlobalPosition = position;
-
+    private void ApplyVelocity()
+    {
         Velocity = new Vector2(Mathf.Round(velocity.X), Mathf.Round(velocity.Y));
         MoveAndSlide();
+    }
+    #endregion
+
+    #region === SALTO Y PARED ===
+    private void HandleJump()
+    {
+        if (!jumpPressed) return;
+
+        if (IsOnFloor())
+        {
+            velocity.Y = -JumpForce;
+            doubleJump = true;
+            jumpSound?.Play();
+        }
+        else if (canDoubleJump && doubleJump)
+        {
+            velocity.Y = -JumpForce;
+            doubleJump = false;
+            jumpSound?.Play();
+        }
+        else if (IsOnWall() && canWallGrab)
+        {
+            velocity.Y = -JumpForce;
+            velocity.X = anim.FlipH ? Speed : -Speed;
+
+            canWallGrab = false;
+            GetTree().CreateTimer(0.2f).Timeout += () => canWallGrab = true;
+
+            jumpSound?.Play();
+        }
+    }
+
+    private void HandleWallGrab()
+    {
+        if (!IsOnWall() || !canWallGrab) return;
+
+        if (!Input.IsActionPressed("move_up") && !Input.IsActionPressed("move_down"))
+        {
+            velocity.Y = Gravity * 0.1f;
+        }
+
+        if (Input.IsActionPressed("move_up"))
+        {
+            velocity.Y = -WallClimbSpeed;
+        }
+    }
+    #endregion
+
+    #region === ROLL / DESLIZAMIENTO ===
+    private void HandleRoll()
+    {
+        if (!rollPressed || isRolling || !IsOnFloor()) return;
+
+        isRolling = true;
+        velocity.X = RollSpeed * (moveDirection != 0 ? moveDirection : 1);
+        Collision.Disabled = true;
+        CollisionRoll.Disabled = false;
+        rollTimer.Start();
+    }
+
+    private void _OnRollTimerTimeout()
+    {
+        isRolling = false;
+
+        // Intentar restaurar la colisión grande solo si hay espacio
+        CollisionRoll.Disabled = true;
+        Collision.Disabled = false;
+
+        if (TestMove(Transform, Vector2.Zero))
+        {
+            Collision.Disabled = true;
+            CollisionRoll.Disabled = false;
+        }
+    }
+    #endregion
+
+    #region === LÍMITES DEL NIVEL ===
+    private void ClampToLevelBounds()
+    {
+        Vector2 position = GlobalPosition;
+        position.X = Mathf.Clamp(position.X, LeftLimit, RightLimit);
+        GlobalPosition = position;
+    }
+
+    private void CheckDeathZone()
+    {
+        if (GlobalPosition.Y > DeathYThreshold)
+        {
+            TakeDamage(MaxHealth); // muerte instantánea
+        }
     }
 
     public void SetLimits(float left, float right)
@@ -147,49 +224,41 @@ public partial class Player : CharacterBody2D
         LeftLimit = left;
         RightLimit = right;
     }
+    #endregion
 
-    public override void _Process(double delta)
+    #region === ANIMACIONES ===
+    private void UpdateAnimation()
     {
-        if (isDead) return;
-
-        // Selección de animaciones
         if (isRolling)
             anim.Play("Roll");
         else if (IsOnWall() && canWallGrab)
-            anim.Play("Wall_grab"); // 🔹 Nueva animación para agarrarse a la pared
-        else if (!IsOnFloor() && !IsOnWall())
-        {
-            if (Velocity.Y > 0)
-                anim.Play("Fall"); // Animación cuando está cayendo
-            else
-                anim.Play("Jump");
-        }
-        else if (Velocity.X != 0)
+            anim.Play("Wall_grab");
+        else if (!IsOnFloor())
+            anim.Play(velocity.Y > 0 ? "Fall" : "Jump");
+        else if (velocity.X != 0)
             anim.Play("Run");
         else
             anim.Play("Idle");
 
-        // Voltear sprite según dirección de movimiento
-        if (Velocity.X != 0)
-            anim.FlipH = Velocity.X < 0;
+        if (velocity.X != 0)
+            anim.FlipH = velocity.X < 0;
     }
+    #endregion
 
-    // Manejo de daño
+    #region === DAÑO Y VIDA ===
     public void TakeDamage(int damage)
     {
         if (isDead) return;
+
         currentHealth -= damage;
-        hitSound?.Play(); // Reproducir sonido de daño
+        hitSound?.Play();
         EmitSignal(SignalName.HealthChanged, currentHealth);
         GD.Print($"Foxy recibió daño, vida actual: {currentHealth}");
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
-    // Curar a Foxy (opcional)
     public void Heal(int amount)
     {
         if (isDead) return;
@@ -198,13 +267,11 @@ public partial class Player : CharacterBody2D
         GD.Print($"Foxy se curó, vida actual: {currentHealth}");
     }
 
-
     private void Die()
     {
         isDead = true;
         Velocity = Vector2.Zero;
         anim.Play("Death");
-
         GetTree().CreateTimer(1.5f).Timeout += GameOver;
     }
 
@@ -216,30 +283,23 @@ public partial class Player : CharacterBody2D
         isDead = false;
         anim.Play("Idle");
     }
+    #endregion
 
-    // Fin de roll (se activa cuando el Timer termina)
-    private void _OnRollTimerTimeout()
-    {
-        isRolling = false;
-
-        // 🔹 Restaurar colisión (grande activa, pequeña desactiva)
-        Collision.Disabled = false;
-        CollisionRoll.Disabled = true;
-    }
-
+    #region === ENEMIGOS ===
     private void OnHitEnemy(Area2D area)
     {
         if (area.Owner is Enemies enemy && !enemy.IsDead())
         {
             enemy.TakeDamage(1);
-
-            // Rebote del jugador al pisar
-            Velocity = new Vector2(Velocity.X, -JumpForce / 1.5f); // Rebote más suave
+            velocity.Y = -JumpForce / 1.5f; // Rebote suave
         }
     }
+    #endregion
 
+    #region === CHECKPOINT ===
     public void SetRespawnPoint(Vector2 position)
     {
         respawnPoint = position;
     }
+    #endregion
 }

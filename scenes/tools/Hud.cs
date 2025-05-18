@@ -7,6 +7,7 @@ using System;
 /// </summary>
 public partial class Hud : CanvasLayer
 {
+     [ExportGroup("Referencias de Nodo")]
     // <summary>
     /// Sprite animado que muestra la cantidad de vida del jugador.
     /// Cada frame representa un estado de salud.

@@ -1,21 +1,37 @@
 using Godot;
 
+/// <summary>
+/// Plataforma que se mueve entre dos puntos con una velocidad constante.
+/// Si un jugador está sobre la plataforma, se mueve junto con ella.
+/// </summary>
 public partial class MovingPlatform : Node2D
 {
-    [Export] public Vector2 RelativeOffset = new Vector2(200, 0); // Distancia hacia donde se moverá
+    /// <summary>
+    /// Distancia relativa desde la posición inicial hacia donde se moverá la plataforma.
+    /// </summary>
+    [Export] public Vector2 RelativeOffset = new Vector2(200, 0);
+    
     [Export] public float Speed = 50f;
-
-    private Vector2 PointA;
-    private Vector2 PointB;
-    private bool goingToB = true;
+ 
+    private Vector2 PointA;   
+    private Vector2 PointB;   
+    private bool goingToB = true;    
     private Node2D playerOnPlatform = null;
 
+    /// <summary>
+    /// Inicializa los puntos A y B en base a la posición global y el offset.
+    /// </summary>
     public override void _Ready()
     {
         PointA = GlobalPosition;
         PointB = PointA + RelativeOffset;
     }
 
+    /// <summary>
+    /// Se llama cada frame. Mueve la plataforma entre los puntos A y B,
+    /// y mueve al jugador si está montado en la plataforma.
+    /// </summary>
+    /// <param name="delta">Tiempo transcurrido desde el último frame.</param>
     public override void _Process(double delta)
     {
         Vector2 target = goingToB ? PointB : PointA;

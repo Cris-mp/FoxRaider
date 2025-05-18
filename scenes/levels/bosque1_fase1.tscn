@@ -12,9 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://cgtdw8oq1f4fl" path="res://scenes/tools/TriggerCambioNivel.tscn" id="9_ta5bg"]
 [ext_resource type="AudioStream" uid="uid://dqvaykggar6iw" path="res://assets/audio/music/world wanderer.ogg" id="11_2js6x"]
 
-[node name="Bosque1Fase1" type="Node2D"]
+[node name="Bosque1Fase1" type="Node2D" node_paths=PackedStringArray("player", "camera", "hud")]
 y_sort_enabled = true
 script = ExtResource("1_smwv2")
+player = NodePath("Player")
+camera = NodePath("Camera")
+hud = NodePath("Hud")
 
 [node name="Hud" parent="." instance=ExtResource("2_w7e8p")]
 
@@ -62,8 +65,6 @@ tile_set = ExtResource("3_qppb5")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_dlr3r")]
 position = Vector2(184, 144)
-limit_left = 0
-limit_right = 2564
 limit_smoothed = true
 position_smoothing_speed = 10.0
 drag_horizontal_offset = 0.2

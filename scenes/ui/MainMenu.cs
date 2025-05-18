@@ -1,87 +1,70 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Controla el menú principal, carga niveles desbloqueados, 
+/// y permite al jugador seleccionar niveles disponibles.
+/// </summary>
 public partial class MainMenu : Control
 {
-    VBoxContainer menu;
-    VBoxContainer niveles;
+    [Export] public NivelData[] Niveles; // Datos de cada nivel (nombre y ruta)
+    [Export] public TextureButton[] BotonesNiveles; // Botones asociados en el menú
+
+    [ExportGroup("Referencias de UI")]
+    [Export] private VBoxContainer menu;
+    [Export] private VBoxContainer selectorNiveles;
+    [Export] private Button btnJugar;
+    [Export] private Button btnSalir;
 
     public override void _Ready()
     {
-        GameState.LoadGame();
-        
-        menu = GetNode<VBoxContainer>("ctdBotones");
-        niveles = GetNode<VBoxContainer>("ctdNiveles");
-        menu.GetNode<Button>("btnJugar").Pressed += OnStartButtonPressed;
-        menu.GetNode<Button>("btnSalir").Pressed += OnExitButtonPressed;
+        GameState.LoadGame();        
 
-        var bosque1 = niveles.GetNode<HBoxContainer>("HBoxContainer");
-        bosque1.GetNode<TextureButton>("nivel1").Pressed += () => OnStartButtonPressed_lvl("nivel1");
-        bosque1.GetNode<TextureButton>("nivel2").Pressed += () => OnStartButtonPressed_lvl("nivel2");
-        bosque1.GetNode<TextureButton>("nivel3").Pressed += () => OnStartButtonPressed_lvl("nivel3");
-        var bosque2 = niveles.GetNode<HBoxContainer>("HBoxContainer2");
-        bosque2.GetNode<TextureButton>("nivel4").Pressed += () => OnStartButtonPressed_lvl("nivel4");
-        bosque2.GetNode<TextureButton>("nivel5").Pressed += () => OnStartButtonPressed_lvl("nivel5");
-        bosque2.GetNode<TextureButton>("nivel6").Pressed += () => OnStartButtonPressed_lvl("nivel6");
-        ActualizarBotonesNiveles();
+        // Configurar botones de nivel dinámicamente
+        for (int i = 0; i < Niveles.Length; i++)        {
+            
+            var nivel = Niveles[i];
+            var boton = BotonesNiveles[i];
+
+            bool habilitado = (i + 1) <= GameState.MaxLevelUnlocked;
+            boton.Disabled = !habilitado;
+            boton.Modulate = habilitado ? Colors.White : new Color(1, 1, 1, 0.5f);
+
+            boton.Pressed += () => CargarNivel(nivel.RutaEscena);
+        }
     }
 
+    /// <summary>
+    /// Oculta el menú principal y muestra la selección de niveles.
+    /// </summary>
     private void OnStartButtonPressed()
-    {            
+    {
         menu.Visible = false;
-        niveles.Visible = true;
+        selectorNiveles.Visible = true;
     }
 
-    private void OnStartButtonPressed_lvl(string nivel)
+    /// <summary>
+    /// Carga la escena del nivel especificado.
+    /// </summary>
+    /// <param name="ruta">Ruta del archivo .tscn de la escena a cargar.</param>
+    private void CargarNivel(string ruta)
     {
-        PackedScene scene = null;
-        switch (nivel)
+        var scene = ResourceLoader.Load<PackedScene>(ruta);
+        if (scene != null)
         {
-            case "nivel1":
-                scene = ResourceLoader.Load<PackedScene>("res://scenes/levels/bosque1_fase1.tscn");
-                break;
-            case "nivel2":
-                scene = ResourceLoader.Load<PackedScene>("res://scenes/levels/bosque1_fase2.tscn");
-                break;
-            case "nivel3":
-                scene = ResourceLoader.Load<PackedScene>("res://scenes/levels/bosque1_fase3.tscn");
-                break;
-            case "nivel4":
-                scene = ResourceLoader.Load<PackedScene>("res://scenes/levels/bosque2_fase1.tscn");
-                break;
-            case "nivel5":
-                scene = ResourceLoader.Load<PackedScene>("res://scenes/levels/bosque2_fase2.tscn");
-                break;
-            case "nivel6":
-                scene = ResourceLoader.Load<PackedScene>("res://scenes/levels/bosque2_fase3.tscn");
-                break;
+            GetTree().ChangeSceneToPacked(scene);
         }
-        GetTree().ChangeSceneToPacked(scene);
-    }
-
-    private void ActualizarBotonesNiveles()
-    {
-        for (int i = 1; i <= 6; i++)
+        else
         {
-            string nivelName = $"nivel{i}";
-            TextureButton btn = null;
-
-            if (i <= 3)
-                btn = GetNode<TextureButton>($"ctdNiveles/HBoxContainer/{nivelName}");
-            else
-                btn = GetNode<TextureButton>($"ctdNiveles/HBoxContainer2/{nivelName}");
-
-            if (btn != null)
-            {
-                bool habilitado = i <= GameState.MaxLevelUnlocked;
-                btn.Disabled = !habilitado;
-                btn.Modulate = habilitado ? Colors.White : new Color(1, 1, 1, 0.5f); // Opaco si está bloqueado
-            }
+            GD.PrintErr($"❌ No se pudo cargar la escena: {ruta}");
         }
     }
 
+    /// <summary>
+    /// Sale del juego.
+    /// </summary>
     private void OnExitButtonPressed()
-    {      
+    {
         GetTree().Quit();
     }
 }

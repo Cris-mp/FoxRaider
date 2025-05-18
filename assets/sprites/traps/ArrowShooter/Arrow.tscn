@@ -18,3 +18,5 @@ vframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 1.75)
 shape = SubResource("RectangleShape2D_tkal0")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

@@ -1,15 +1,29 @@
 using Godot;
 using System;
 
+// <summary>
+/// Script del nodo raíz de la escena "Bosque1Fase3".
+/// Se encarga de inicializar referencias entre el jugador, la cámara y el HUD,
+/// estableciendo límites y conectando eventos necesarios.
+/// </summary>
 public partial class Bosque1Fase3 : Node2D
 {
+    [ExportGroup("Referencias de Nodo")]
+    [Export] private Player player;
+    [Export] private Camera camera;
+    [Export] private Hud hud;
+
+    /// <summary>
+    /// Método llamado cuando el nodo entra en la escena.
+    /// Conecta el evento de salud del jugador con el HUD y configura
+    /// los límites tanto para el jugador como para la cámara.
+    /// </summary>
     public override void _Ready()
     {
-        var player = GetNode<Player>("Player");
-        var hud = GetNode<Hud>("Hud");
+        player.HealthChanged += hud.UpdateLife;
+        player.SetLimits(0f, 2562f);
 
-        player.SetLimits(0f, 2096f);
-        player.HealthChanged += hud.UpdateLife; 
-        
+        camera.SetLimits(0f, 2096f, -768f, 256f);
     }
 }
+
