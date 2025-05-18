@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NivelData" load_steps=2 format=3 uid="uid://pja4nsbgdajk"]
+
+[ext_resource type="Script" uid="uid://fgfeqj78dj74" path="res://scripts/ui/NivelData.cs" id="1_kh8r6"]
+
+[resource]
+script = ExtResource("1_kh8r6")
+Nombre = "nivel3"
+RutaEscena = "uid://c6r3mj5ntpko3"
+metadata/_custom_type_script = "uid://fgfeqj78dj74"

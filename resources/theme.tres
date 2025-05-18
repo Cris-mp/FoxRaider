@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bk801t0ou0e8v"]
+
+[ext_resource type="FontFile" uid="uid://c667b72m2408t" path="res://assets/sprites/ui_hud/04B_20__.TTF" id="1_cqcnm"]
+
+[resource]
+default_font = ExtResource("1_cqcnm")
+default_font_size = 16

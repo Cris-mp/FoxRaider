@@ -1,20 +1,20 @@
 [gd_scene load_steps=18 format=4 uid="uid://cicekm8xkcwn8"]
 
-[ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://assets/tilesets/bosque1.tres" id="1_0ef7b"]
-[ext_resource type="Script" uid="uid://bee5bq1cs21pk" path="res://scenes/levels/Bosque1Fase2.cs" id="1_vbvsf"]
+[ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://resources/bosque1.tres" id="1_0ef7b"]
+[ext_resource type="Script" uid="uid://bee5bq1cs21pk" path="res://scripts/levels/Bosque1Fase2.cs" id="1_vbvsf"]
 [ext_resource type="PackedScene" uid="uid://cmonnygm473bq" path="res://scenes/tools/HUD.tscn" id="2_pltl6"]
-[ext_resource type="PackedScene" uid="uid://c2hpg3dowilww" path="res://assets/sprites/traps/Spikes/spike.tscn" id="2_tp1s8"]
+[ext_resource type="PackedScene" uid="uid://c2hpg3dowilww" path="res://scenes/traps/spike.tscn" id="2_tp1s8"]
 [ext_resource type="PackedScene" uid="uid://5pyjvjts2vwy" path="res://scenes/tools/Camera.tscn" id="3_e65ps"]
-[ext_resource type="PackedScene" uid="uid://6vwncf6x55fb" path="res://assets/sprites/collectables/teer/Fragmento.tscn" id="4_fkikm"]
-[ext_resource type="PackedScene" uid="uid://bkqhxml7rqx06" path="res://assets/sprites/player/player.tscn" id="4_vbvsf"]
-[ext_resource type="PackedScene" uid="uid://d4ctki4ty6qxm" path="res://assets/sprites/platforms/fallingPlatform/fallingPlatform.tscn" id="6_6ord5"]
+[ext_resource type="PackedScene" uid="uid://6vwncf6x55fb" path="res://scenes/collectables/Fragmento.tscn" id="4_fkikm"]
+[ext_resource type="PackedScene" uid="uid://bkqhxml7rqx06" path="res://scenes/player/player.tscn" id="4_vbvsf"]
+[ext_resource type="PackedScene" uid="uid://d4ctki4ty6qxm" path="res://scenes/platforms/fallingPlatform.tscn" id="6_6ord5"]
 [ext_resource type="Texture2D" uid="uid://bbwvcvvfmvu7r" path="res://assets/sprites/collectables/teer/red_gem.png" id="6_xhawc"]
-[ext_resource type="PackedScene" uid="uid://doumy3wp7x6qh" path="res://assets/sprites/platforms/movingPlatform/movingPlatform.tscn" id="7_qwsu8"]
+[ext_resource type="PackedScene" uid="uid://doumy3wp7x6qh" path="res://scenes/platforms/movingPlatform.tscn" id="7_qwsu8"]
 [ext_resource type="PackedScene" uid="uid://cgtdw8oq1f4fl" path="res://scenes/tools/TriggerCambioNivel.tscn" id="8_ckd6s"]
 [ext_resource type="PackedScene" uid="uid://r1focgk5lfs7" path="res://scenes/tools/ZonaControl.tscn" id="9_ckd6s"]
 [ext_resource type="PackedScene" uid="uid://bl14w8nbp0h2q" path="res://scenes/tools/DeathZone.tscn" id="10_vgxfq"]
-[ext_resource type="PackedScene" uid="uid://ceh8s3ydsvpt3" path="res://assets/sprites/enemies/zarigueya/Zarigueya.tscn" id="11_kph4j"]
-[ext_resource type="PackedScene" uid="uid://db83odfpemnlc" path="res://assets/sprites/collectables/cherry.tscn" id="12_f2jcv"]
+[ext_resource type="PackedScene" uid="uid://ceh8s3ydsvpt3" path="res://scenes/enemies/Zarigueya.tscn" id="11_kph4j"]
+[ext_resource type="PackedScene" uid="uid://db83odfpemnlc" path="res://scenes/collectables/cherry.tscn" id="12_f2jcv"]
 [ext_resource type="PackedScene" uid="uid://bitjlye81cs6a" path="res://scenes/tools/RespawnArea.tscn" id="15_mrnxx"]
 [ext_resource type="AudioStream" uid="uid://c5ynjgwrx5ljb" path="res://assets/audio/music/dark-happy-world.ogg" id="16_le7u6"]
 
@@ -115,17 +115,13 @@ tile_map_data = PackedByteArray("AAACAAMAAAARAAkAAAADAAMAAAARAAkAAAAEAAMAAAARAAk
 tile_set = ExtResource("1_0ef7b")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_e65ps")]
-position = Vector2(192, -883)
-limit_left = 0
-limit_top = -1024
-limit_right = 1344
-limit_bottom = 300
-limit_smoothed = true
-drag_top_margin = 0.0
+position = Vector2(192, -872)
+limit_top = -1040
+limit_bottom = 280
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_vbvsf")]
-position = Vector2(422, -926)
+position = Vector2(107, -917)
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -142,7 +138,7 @@ position = Vector2(1216, -864)
 position = Vector2(1280, -720)
 
 [node name="FallingPlatform4" parent="Platforms" instance=ExtResource("6_6ord5")]
-position = Vector2(1280, -576)
+position = Vector2(1283, -576)
 
 [node name="FallingPlatform10" parent="Platforms" instance=ExtResource("6_6ord5")]
 position = Vector2(1168, -432)
@@ -177,7 +173,7 @@ position = Vector2(1168, -672)
 RelativeOffset = Vector2(130, 0)
 
 [node name="MovingPlatform2" parent="Platforms" instance=ExtResource("7_qwsu8")]
-position = Vector2(1280, -528)
+position = Vector2(1297, -528)
 RelativeOffset = Vector2(-130, 0)
 
 [node name="MovingPlatform6" parent="Platforms" instance=ExtResource("7_qwsu8")]
@@ -495,7 +491,7 @@ position = Vector2(615, 169)
 [node name="RespawnArea" parent="Node2D" instance=ExtResource("15_mrnxx")]
 position = Vector2(568, -902)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_le7u6")
 volume_db = -20.03
 autoplay = true

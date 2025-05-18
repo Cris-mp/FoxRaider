@@ -14,11 +14,11 @@ config/name="FoxRaider"
 run/main_scene="uid://debwf6lf8y3ji"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="uid://dvfra6a5gjb2m"
 
 [autoload]
 
-GameState="*res://scenes/tools/GameState.cs"
+GameState="*res://scripts/tools/GameState.cs"
 
 [display]
 

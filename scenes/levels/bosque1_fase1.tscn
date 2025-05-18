@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://5pyjvjts2vwy" path="res://scenes/tools/Camera.tscn" id="1_dlr3r"]
 [ext_resource type="Texture2D" uid="uid://dqhnad8b14d1e" path="res://assets/backgrounds/b1_f1/back.png" id="1_s6gyn"]
-[ext_resource type="Script" uid="uid://crptywb3x3e3" path="res://scenes/levels/Bosque1Fase1.cs" id="1_smwv2"]
+[ext_resource type="Script" uid="uid://crptywb3x3e3" path="res://scripts/levels/Bosque1Fase1.cs" id="1_smwv2"]
 [ext_resource type="Texture2D" uid="uid://druy86j46gwjd" path="res://assets/backgrounds/b1_f1/middle.png" id="2_k8hws"]
-[ext_resource type="PackedScene" uid="uid://bkqhxml7rqx06" path="res://assets/sprites/player/player.tscn" id="2_qppb5"]
+[ext_resource type="PackedScene" uid="uid://bkqhxml7rqx06" path="res://scenes/player/player.tscn" id="2_qppb5"]
 [ext_resource type="PackedScene" uid="uid://cmonnygm473bq" path="res://scenes/tools/HUD.tscn" id="2_w7e8p"]
-[ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://assets/tilesets/bosque1.tres" id="3_qppb5"]
-[ext_resource type="PackedScene" uid="uid://ceh8s3ydsvpt3" path="res://assets/sprites/enemies/zarigueya/Zarigueya.tscn" id="6_k8hws"]
-[ext_resource type="PackedScene" uid="uid://db83odfpemnlc" path="res://assets/sprites/collectables/cherry.tscn" id="8_n6ct5"]
+[ext_resource type="TileSet" uid="uid://f1ajhe7jgr0m" path="res://resources/bosque1.tres" id="3_qppb5"]
+[ext_resource type="PackedScene" uid="uid://ceh8s3ydsvpt3" path="res://scenes/enemies/Zarigueya.tscn" id="6_k8hws"]
+[ext_resource type="PackedScene" uid="uid://db83odfpemnlc" path="res://scenes/collectables/cherry.tscn" id="8_n6ct5"]
 [ext_resource type="PackedScene" uid="uid://cgtdw8oq1f4fl" path="res://scenes/tools/TriggerCambioNivel.tscn" id="9_ta5bg"]
 [ext_resource type="AudioStream" uid="uid://dqvaykggar6iw" path="res://assets/audio/music/world wanderer.ogg" id="11_2js6x"]
 
@@ -65,13 +65,12 @@ tile_set = ExtResource("3_qppb5")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_dlr3r")]
 position = Vector2(184, 144)
-limit_smoothed = true
 position_smoothing_speed = 10.0
 drag_horizontal_offset = 0.2
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_qppb5")]
-position = Vector2(2128, -160)
+position = Vector2(32, 144)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -192,8 +191,8 @@ ScenePath = "uid://cicekm8xkcwn8"
 desbloquearDobleSalto = true
 NivelDesbloquear = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_2js6x")
-volume_db = -10.0
+volume_db = -20.015
 autoplay = true
 parameters/looping = true

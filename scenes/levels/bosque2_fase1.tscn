@@ -1,3 +1,29 @@
-[gd_scene format=3 uid="uid://ct7loxdcthygu"]
+[gd_scene load_steps=4 format=3 uid="uid://ct7loxdcthygu"]
 
-[node name="Bosque2Fase1" type="Node2D"]
+[ext_resource type="Script" uid="uid://dgh3gvov6l30e" path="res://scripts/levels/Bosque2Fase1.cs" id="1_16428"]
+[ext_resource type="FontFile" uid="uid://c667b72m2408t" path="res://assets/sprites/ui_hud/04B_20__.TTF" id="1_tfj7y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_16428"]
+font = ExtResource("1_tfj7y")
+
+[node name="Bosque2Fase1" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_16428")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 215.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_right = 384.0
+offset_bottom = 217.0
+text = "Mas niveles 
+proximamente..."
+label_settings = SubResource("LabelSettings_16428")
+horizontal_alignment = 1
+vertical_alignment = 1

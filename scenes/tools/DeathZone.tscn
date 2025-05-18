@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bl14w8nbp0h2q"]
 
-[ext_resource type="Script" uid="uid://dyuyqu338fkgu" path="res://scenes/tools/DeathZone.cs" id="1_s6iuu"]
+[ext_resource type="Script" uid="uid://dyuyqu338fkgu" path="res://scripts/tools/DeathZone.cs" id="1_s6iuu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5y8oc"]
 

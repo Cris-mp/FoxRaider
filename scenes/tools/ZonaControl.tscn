@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://r1focgk5lfs7"]
 
-[ext_resource type="Script" uid="uid://dpgbx8jw5lwgg" path="res://scenes/tools/ZonaControl.cs" id="1_nj1nj"]
+[ext_resource type="Script" uid="uid://dpgbx8jw5lwgg" path="res://scripts/tools/ZonaControl.cs" id="1_nj1nj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ek44i"]
 

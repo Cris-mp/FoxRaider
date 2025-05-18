@@ -119,7 +119,7 @@ Se han añadido las musicas de los escenarios
 
 ✏️ También he comenzado a documentar algunas partes
 
-## 📅 17/05/2025: 🐛 Correción de bugs, mejoras y ✏️ documentacion
+## 📅 17/05/2025: 🐛 Correción de bugs, ➕ mejoras y ✏️ documentacion
 
 ### 🐛 No se establece animacion de saltar cuando Foxy esta en contacto con la pared.
 La animacion "Jump" solo se establecia cuando foxy no estaba en el suelo y no estaba en una pared,asi que hora se permite la animación "Jump" si el jugador va hacia arriba aunque esté en una pared.
@@ -127,7 +127,7 @@ La animacion "Jump" solo se establecia cuando foxy no estaba en el suelo y no es
 ### 🐛 Si Foxy termina de rodar en una zona estrecha se queda atascado.
 Ahora evito que la colisión grande se reactive cuando Foxy termina de rodar dentro de un espacio estrecho. Para ello verifico que hay espacio libre usando TestMove
 
-### 🐛 Al caer no se me activa el salto. Solucionado
+### 🐛 Al caer no se me activa el salto.
 La variable doubleJump no se me reinciaba correctamente asi que ahora la reinicio siempre al tocar el suelo.
 
 ### ➕ Mejoras
@@ -135,17 +135,28 @@ La variable doubleJump no se me reinciaba correctamente asi que ahora la reinici
 - Se ha modificado la camara para que coja los limites superior e inferior del mapa.
 - Se ha modificado el menu haciendo la creacion de botones de forma dinamica mediante el aprovechamiento de los export y la creacion de recursos.
 
-### Documentación
+### ✏️ Documentación
 Se ha limpiado codigo y ordenado algunas clases. Ademas se han comentado las clases y se ha hecho un mejor uso del inspector de Godot.
 
+## 📅 18/05/2025: 🐛 Correción de bugs, ✏️ documentacion, efectos sonoros y Reorganización 
+### 🐛 A veces Foxy recibe daño cuando le salta encima de una zarigueya.
+Tenia mal puesta la señal. Haya puesto la señal en un area_entees en vez de body_Entered asi que me detectaba el hitpoint del enemigo para matarlo y me aplicaba daño.
 
-### ➡️ Siguientes pasos
-- Acabar de documentar y limpiar codigo. Me queda por repasar los enemigos y comentar la clase Player.
-- Añadir efectos sonoros 
-- Corregir bugs:
-# 🐛 Bugs detectados (pendientes de solución)
-- A veces Foxy recibe daño cuando le salta encima de una zarigueya.
+### Añadir efectos sonoros
+Se han añadido algunos efectos de sonido:
+- Botones del menu
+- Matar un enemigo
+- Coger la lagrima
+- Rodar de Foxy
 
+### Pantalla final
+Se haimplementado una pantalla en el ultimo nivel que indica que habra mas niveles en el futuro.
+
+### ✏️ Documentación
+Se han comentado las cases de player y enemigos
+
+### Reorganizacion de archivos
+Se ha ordenado los archivos separando los scrips, escenas, recursos y assets en carpetas distintas.
 
 # 📊 Planificacion Temporal
 ✅ Configuración de Godot  
@@ -161,8 +172,8 @@ Se ha limpiado codigo y ordenado algunas clases. Ademas se han comentado las cla
 ✅ Sistema de habilidades desbloqueables  
 ✅ Sistema de Guardado (JSON)  
 ✅ Crear el Selector de Niveles  
-⬜ Añadir sonido y efectos  
-⬜ Pruebas y ajustes finales  
+✅ Añadir sonido y efectos  
+✅ Pruebas y ajustes finales  
 ⬜ Informe Final  
 
 ## 💻 Tecnologías y Herramientas

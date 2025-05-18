@@ -1,9 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://cmonnygm473bq"]
 
-[ext_resource type="Script" uid="uid://d11owq1rlkwve" path="res://scenes/tools/Hud.cs" id="1_sjdmv"]
-[ext_resource type="Theme" uid="uid://bk801t0ou0e8v" path="res://scenes/ui/theme.tres" id="2_2om6i"]
+[ext_resource type="Script" uid="uid://d11owq1rlkwve" path="res://scripts/tools/Hud.cs" id="1_sjdmv"]
+[ext_resource type="Theme" uid="uid://bk801t0ou0e8v" path="res://resources/theme.tres" id="2_2om6i"]
 [ext_resource type="Texture2D" uid="uid://dxqgeixbiapgr" path="res://assets/sprites/collectables/teer/empy_red.png" id="3_2gguq"]
-[ext_resource type="Texture2D" uid="uid://dxjrysoijstvb" path="res://scenes/tools/heart.png" id="3_2om6i"]
+[ext_resource type="Texture2D" uid="uid://dxjrysoijstvb" path="res://assets/sprites/ui_hud/heart.png" id="3_2om6i"]
 [ext_resource type="Texture2D" uid="uid://dh53hov4kmn41" path="res://assets/sprites/collectables/teer/empy-teer.png" id="4_b8kyt"]
 [ext_resource type="Texture2D" uid="uid://dcyci52p3jrqb" path="res://assets/sprites/collectables/teer/empy_blue_red.png" id="4_gpp6d"]
 [ext_resource type="Texture2D" uid="uid://ff13abj5gay4" path="res://assets/sprites/collectables/teer/empy_green.png" id="4_qeqef"]

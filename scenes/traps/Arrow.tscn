@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://chk6v5ei1b4t2"]
+
+[ext_resource type="Script" uid="uid://dq1e6bhdss8cr" path="res://scripts/traps/Arrow.cs" id="1_6t4oj"]
+[ext_resource type="Texture2D" uid="uid://dc7dh4ni65yn6" path="res://assets/sprites/traps/ArrowShooter/Arrow.png" id="2_yhfbe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkal0"]
+size = Vector2(24, 2.5)
+
+[node name="Arrow" type="Area2D"]
+collision_mask = 7
+script = ExtResource("1_6t4oj")
+
+[node name="SpriteArrow" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_yhfbe")
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 1.75)
+shape = SubResource("RectangleShape2D_tkal0")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

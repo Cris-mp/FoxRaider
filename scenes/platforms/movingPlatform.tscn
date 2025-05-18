@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://doumy3wp7x6qh"]
+
+[ext_resource type="Texture2D" uid="uid://b1pvl0owrrsqd" path="res://assets/sprites/platforms/platform-long.png" id="1_d6ki1"]
+[ext_resource type="Script" uid="uid://cbxts06ramdgt" path="res://scripts/platforms/MovingPlatform.cs" id="1_qoda7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qoda7"]
+size = Vector2(32, 16)
+
+[node name="MovingPlatform" type="Node2D"]
+script = ExtResource("1_qoda7")
+
+[node name="SpriteMovPlat" type="Sprite2D" parent="."]
+texture = ExtResource("1_d6ki1")
+
+[node name="MovPlat" type="CharacterBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionMovPlat" type="CollisionShape2D" parent="MovPlat"]
+shape = SubResource("RectangleShape2D_qoda7")
+debug_color = Color(0.372528, 0.614954, 0, 0.42)

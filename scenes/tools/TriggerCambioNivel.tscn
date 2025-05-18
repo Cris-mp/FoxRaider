@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgtdw8oq1f4fl"]
 
-[ext_resource type="Script" uid="uid://cjypiy4nlp2uf" path="res://scenes/tools/TriggerCambioNivel.cs" id="1_e6y2j"]
+[ext_resource type="Script" uid="uid://cjypiy4nlp2uf" path="res://scripts/tools/TriggerCambioNivel.cs" id="1_e6y2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uk4rx"]
 size = Vector2(42, 42)
