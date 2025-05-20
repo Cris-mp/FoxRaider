@@ -493,6 +493,5 @@ position = Vector2(568, -902)
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_le7u6")
-volume_db = -20.03
 autoplay = true
 parameters/looping = true

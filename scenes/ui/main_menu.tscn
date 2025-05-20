@@ -175,11 +175,11 @@ texture_disabled = ExtResource("26_qpknu")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1g8jr")
-volume_db = -10.0
 autoplay = true
 parameters/looping = true
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+volume_db = 10.599
 
 [connection signal="pressed" from="ctdBotones/btnJugar" to="." method="OnStartButtonPressed"]
 [connection signal="pressed" from="ctdBotones/btnSalir" to="." method="OnExitButtonPressed"]

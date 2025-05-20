@@ -70,7 +70,7 @@ drag_horizontal_offset = 0.2
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_qppb5")]
-position = Vector2(32, 144)
+position = Vector2(22, 151)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -193,6 +193,5 @@ NivelDesbloquear = 2
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_2js6x")
-volume_db = -20.015
 autoplay = true
 parameters/looping = true

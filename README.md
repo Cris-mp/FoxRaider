@@ -174,15 +174,15 @@ Se ha ordenado los archivos separando los scrips, escenas, recursos y assets en 
 ✅ Crear el Selector de Niveles  
 ✅ Añadir sonido y efectos  
 ✅ Pruebas y ajustes finales  
-⬜ Informe Final  
+✅ Informe Final  
 
 ## 💻 Tecnologías y Herramientas
 - <b>Motor</b>: Godot 4
 - <b>Lenguaje</b>: C#
 - <b>Editor</b>: Visual Studio Code
 - <b>Extensiones utilizadas</b>:
-    - C#
-    - C# Dev Kit
-    - C# Tools for Godot
-    - Godot Snippets for C#
-    - Godot Docs for C#
+	- C#
+	- C# Dev Kit
+	- C# Tools for Godot
+	- Godot Snippets for C#
+	- Godot Docs for C#

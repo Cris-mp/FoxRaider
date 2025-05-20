@@ -41,7 +41,7 @@ public partial class Camera : Camera2D
         leftLimit = left;
         rightLimit = right;
         topLimit = top;
-        bottomLimit = bottom;        
+        bottomLimit = bottom;
     }
 
     /// <summary>
@@ -71,9 +71,15 @@ public partial class Camera : Camera2D
             target.Y,
             topLimit + halfScreenSize.Y,
             bottomLimit - halfScreenSize.Y
-        );      
+        );
 
         // Aplica la posición final
         GlobalPosition = new Vector2(clampedX, clampedY);
+    }
+    
+    
+    public void SetYOffset(float offset)
+    {
+        yOffset = offset;
     }
 }
