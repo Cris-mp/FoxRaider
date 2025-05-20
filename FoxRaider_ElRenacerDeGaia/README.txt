@@ -1,0 +1,1 @@
+El juego depende de las dependencias de esta capeta, para que se ejecute correctamente no sacar el FoxRaider_ElRenacerDeGaia.exe de la carpeta.
