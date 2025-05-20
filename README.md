@@ -174,7 +174,11 @@ Se ha ordenado los archivos separando los scrips, escenas, recursos y assets en 
 ✅ Crear el Selector de Niveles  
 ✅ Añadir sonido y efectos  
 ✅ Pruebas y ajustes finales  
-✅ Informe Final  
+✅ Informe Final 
+
+# 🎮 Gameplay
+
+[FoxRaider Gameplay](https://drive.google.com/drive/folders/1WNmhKgpg-AyJSHbvJvWV2dbX8U2dxAUD)
 
 ## 💻 Tecnologías y Herramientas
 - <b>Motor</b>: Godot 4
